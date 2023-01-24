@@ -47,7 +47,11 @@ public class swerveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(Xsupply.getAsDouble(), Ysupply.getAsDouble(), rotationSupply.getAsDouble(), swerve.getGyro()));
+    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(
+        Xsupply.getAsDouble(), 
+        Ysupply.getAsDouble(), 
+        rotationSupply.getAsDouble(), 
+        swerve.getGyro()));
     swerve.zeroGyro(zero.getAsBoolean());
 }
 
