@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.Pigeon2;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.revrobotics.CANSparkMax;
@@ -23,6 +24,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.constraint.SwerveDriveKinematicsConstraint;
 import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,10 +38,11 @@ public class SwerveSubsystem extends SubsystemBase {
   PigeonIMU pigeon = new PigeonIMU(Constants.pigeonID);
 
 
-  AnalogEncoder test1 = new AnalogEncoder(Constants.Front_LeftSTEER_Encoder);
-  AnalogEncoder test2 = new AnalogEncoder(Constants.Front_RightSTEER_Encoder);
-  AnalogEncoder test3 = new AnalogEncoder(Constants.Back_LeftSTEER_Encoder);
-  AnalogEncoder test4 = new AnalogEncoder(Constants.Back_RightSTEER_Encoder);
+  CANCoder test1 = new CANCoder(Constants.Front_LeftSTEER_Encoder);
+  CANCoder test2 = new CANCoder(Constants.Front_RightSTEER_Encoder);
+  CANCoder test3 = new CANCoder(Constants.Back_LeftSTEER_Encoder);
+  CANCoder test4 = new CANCoder(Constants.Back_RightSTEER_Encoder);
+  
 
 
   //Wheel base front to back
@@ -73,7 +76,7 @@ public class SwerveSubsystem extends SubsystemBase {
 
  // int FrontLdrive = Front_leftDRIVEMotor;
   
-// Set the variables in Constants to constants with quick fix because it is not registering as a variable
+
   private ChassisSpeeds baseSpeed = new ChassisSpeeds(0,0,0);
  
   public SwerveSubsystem() {
@@ -107,10 +110,10 @@ public class SwerveSubsystem extends SubsystemBase {
     backLeftModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
     backRightModule.set(states[3].speedMetersPerSecond / Max_Velocity * Voltage, states[3].angle.getRadians());
 
-    SmartDashboard.putNumber("One Encoder", test1.getPositionOffset());
-    SmartDashboard.putNumber("Two Encoder", test2.getPositionOffset());
-    SmartDashboard.putNumber("Four Encoder", test3.getPositionOffset());
-    SmartDashboard.putNumber("Three Encoder", test4.getPositionOffset());
+    SmartDashboard.putNumber("One Encoder", test1.getAbsolutePosition());
+    SmartDashboard.putNumber("Two Encoder", test2.getAbsolutePosition());
+    SmartDashboard.putNumber("Four Encoder", test3.getAbsolutePosition());
+    SmartDashboard.putNumber("Three Encoder", test4.getAbsolutePosition());
   }
 
   @Override

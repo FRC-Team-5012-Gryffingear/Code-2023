@@ -13,14 +13,14 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
-    public static final double trackwidth = 0.5969;
-    public static final double wheelBase = 0.5969;
-  
+    //in meters
+    public static final double trackwidth = 0.5207;
+    public static final double wheelBase = 0.6541;
+  // 0.65405 if needed to change wheelbase 
     public static final int driverController = 0;
     public static final int operatorController = 1;
 
-//fix id
+// FIX ME IDS
     public static final int pigeonID = 0;
 
     public static final int Front_LeftDRIVEMotor = 10;
