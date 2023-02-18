@@ -4,10 +4,18 @@
 
 package frc.robot;
 
-import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
+
+//import frc.robot.commands.Autos;
+import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ExtenderCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.otherInfo.controllerConstant;
+import frc.robot.subsystems.Elevatorsubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Extendersubsystem;
+import frc.robot.subsystems.Intakesubsystem;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -21,13 +29,21 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final ExampleCommand example = new ExampleCommand(m_exampleSubsystem);
+  
+  private final Intakesubsystem Intakesubsys = new Intakesubsystem();
+
+  private final Extendersubsystem Extendsubsys = new Extendersubsystem();
+
+  private final Elevatorsubsystem ElevSubsys = new Elevatorsubsystem();
+
+  private final Joystick driverController = new Joystick(Constants.DriverController);
+  private final Joystick operatorController = new Joystick(Constants.OperatorController);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    
     // Configure the trigger bindings
     configureBindings();
   }
@@ -42,13 +58,26 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    ElevSubsys.setDefaultCommand(new ElevatorCommand(ElevSubsys, 
+    () -> operatorController.getRawAxis(controllerConstant.RIGHT_TRIGGER), 
+    () -> operatorController.getRawAxis(controllerConstant.LEFT_TRIGGER)));
+
+    Intakesubsys.setDefaultCommand(new IntakeCommand(Intakesubsys,
+    () -> operatorController.getRawButton(controllerConstant.A),
+    () -> operatorController.getRawButton(controllerConstant.B),
+    () -> operatorController.getRawButton(controllerConstant.X)));
+
+    Extendsubsys.setDefaultCommand(new ExtenderCommand(Extendsubsys,
+    () -> operatorController.getRawButton(controllerConstant.RB), 
+    () -> operatorController.getRawButton(controllerConstant.LB)));
+
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    //new Trigger(m_exampleSubsystem::exampleCondition)
+      //  .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
 
   /**
@@ -58,6 +87,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return example;
   }
 }
