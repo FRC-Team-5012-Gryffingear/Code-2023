@@ -32,7 +32,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class SwerveSubsystem extends SubsystemBase {
+  public class SwerveSubsystem extends SubsystemBase {
   /** Creates a new SwerveSubsystem. */
   // distance between wheels Left to right 
   PigeonIMU pigeon = new PigeonIMU(Constants.pigeonID);
@@ -42,31 +42,26 @@ public class SwerveSubsystem extends SubsystemBase {
   CANCoder test2 = new CANCoder(Constants.Front_RightSTEER_Encoder);
   CANCoder test3 = new CANCoder(Constants.Back_LeftSTEER_Encoder);
   CANCoder test4 = new CANCoder(Constants.Back_RightSTEER_Encoder);
-  
-
-
-  //Wheel base front to back
-
- 
 
   public static final double Voltage = 12.0;
 
   public static final double Max_Velocity =  6380.0 / 60 * SdsModuleConfigurations.MK4_L1.getDriveReduction() * SdsModuleConfigurations.MK4_L1.getWheelDiameter() * Math.PI;
 
-  public static final double Max_Angle = Max_Velocity / Math.hypot(Constants.trackwidth/2, Constants.wheelBase/2);
+  public static final double Max_Angle = Max_Velocity / Math.hypot(Constants.trackwidth, Constants.wheelBase);
 
 
 
 
   public final SwerveDriveKinematics SwerveKinematics = new SwerveDriveKinematics(
-    new Translation2d(Constants.trackwidth / 2, Constants.wheelBase / 2),
+    //divide by 2 if doesn't work
+    new Translation2d(Constants.trackwidth, Constants.wheelBase),
     //^Front left wheel
     // Front Right
-    new Translation2d(Constants.trackwidth/2, -Constants.wheelBase/2),
+    new Translation2d(Constants.trackwidth, -Constants.wheelBase),
     //Back left
-    new Translation2d(-Constants.trackwidth/2, Constants.wheelBase/2),
+    new Translation2d(-Constants.trackwidth, Constants.wheelBase),
     //back Right
-    new Translation2d(-Constants.trackwidth/2, -Constants.wheelBase/2)  
+    new Translation2d(-Constants.trackwidth, -Constants.wheelBase)  
   );
 
   private final SwerveModule frontLeftModule;
@@ -80,11 +75,12 @@ public class SwerveSubsystem extends SubsystemBase {
   private ChassisSpeeds baseSpeed = new ChassisSpeeds(0,0,0);
  
   public SwerveSubsystem() {
-    frontLeftModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1,Constants.Front_LeftDRIVEMotor,Constants.Front_LeftSTEER_Encoder,Constants.Front_LeftSTEER_Encoder,Constants.Front_LeftSTEER_Offset);
+    frontLeftModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1,Constants.Front_LeftDRIVEMotor,Constants.Front_LeftSTEERMotor,Constants.Front_LeftSTEER_Encoder,Constants.Front_LeftSTEER_Offset);
         //sees current state of module
     frontRightModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1, Constants.Front_RightDRIVEMotor,Constants.Front_RightSTEERMotor,Constants.Front_RightSTEER_Encoder,Constants.Front_RightSTEER_Offset);
     backLeftModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1, Constants.Back_LeftDRIVEMotor, Constants.Back_LeftSTEERMotor, Constants.Back_LeftSTEER_Encoder, Constants.Back_LeftSTEER_Offset);
     backRightModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1, Constants.Back_RightDRIVEMotor, Constants.Back_RightSTEERMotor, Constants.Back_RightSTEER_Encoder, Constants.Back_RIGHTSTEER_Offset);
+
 
 }
 
