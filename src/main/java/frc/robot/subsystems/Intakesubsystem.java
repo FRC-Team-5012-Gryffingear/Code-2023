@@ -31,7 +31,8 @@ public class Intakesubsystem extends SubsystemBase {
   }
 
   //Intake 2 Neos, Extender 2 Neos, Elevator 2 CIMS or talons
-  //Cube button = A, Cone button = B, Open button = X
+  //Cube button = A, Cone button = B, Open button = X/
+  /*
   public void IntakeMovement(boolean cube, boolean cone, boolean Open){
     Neo1.set(0);
 
@@ -53,17 +54,21 @@ public class Intakesubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Neo Strain", Neo1.getOutputCurrent());
     SmartDashboard.putNumber("Neo2 Strain", Neo2.getOutputCurrent());
   }
+   * 
+   */
+  
 /*INCASE doesnt work we switch controls to Open A and Close B
- * public void IntakeMovement(boolean open, boolean close){
- *  Neo1.set(0);
- *  if(open){
- *    Neo1.set(1);
- *  }
- *  if(close){
- *    Neo1.set(-1)
- *  }
- * }
- */
+*/
+  public void IntakeMovement(boolean open, boolean close){
+   Neo1.set(0);
+   if(open){
+     Neo1.set(1);
+   }
+   if(close){
+     Neo1.set(-1);
+   }
+}
+ 
 
 
 

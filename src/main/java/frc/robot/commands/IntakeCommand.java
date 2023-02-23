@@ -18,16 +18,16 @@ public class IntakeCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   //private final ExampleSubsystem m_subsystem;
     private final Intakesubsystem Intakesub;
-    private final BooleanSupplier Cube, Cone, Open;
+    //private final BooleanSupplier Cube, Cone, Open;
+    private final BooleanSupplier Open, Close;
   /**
    * Creates a new IntakeCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public IntakeCommand(Intakesubsystem subsystem, BooleanSupplier Cubes, BooleanSupplier Cones, BooleanSupplier Opens) {
+  public IntakeCommand(Intakesubsystem subsystem,BooleanSupplier Closes, BooleanSupplier Opens) {
     Intakesub = subsystem;
-    Cube = Cubes;
-    Cone = Cones;
+    Close = Closes;
     Open = Opens;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -40,7 +40,7 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Intakesub.IntakeMovement(Cube.getAsBoolean(), Cone.getAsBoolean(), Open.getAsBoolean());
+    Intakesub.IntakeMovement(Open.getAsBoolean(), Close.getAsBoolean());
   }
 
   // Called once the command ends or is interrupted.
