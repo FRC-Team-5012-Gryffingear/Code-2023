@@ -47,21 +47,21 @@ import frc.robot.Constants;
 
   public static final double Max_Velocity =  6380.0 / 60 * SdsModuleConfigurations.MK4_L1.getDriveReduction() * SdsModuleConfigurations.MK4_L1.getWheelDiameter() * Math.PI;
 
-  public static final double Max_Angle = Max_Velocity / Math.hypot(Constants.trackwidth, Constants.wheelBase);
+  public static final double Max_Angle = Max_Velocity / Math.hypot(Constants.trackwidth/2, Constants.wheelBase/2);
 
 
 
 
   public final SwerveDriveKinematics SwerveKinematics = new SwerveDriveKinematics(
     //divide by 2 if doesn't work
-    new Translation2d(Constants.trackwidth, Constants.wheelBase),
+    new Translation2d(Constants.trackwidth/2, Constants.wheelBase/2),
     //^Front left wheel
     // Front Right
-    new Translation2d(Constants.trackwidth, -Constants.wheelBase),
+    new Translation2d(Constants.trackwidth/2, -Constants.wheelBase/2),
     //Back left
-    new Translation2d(-Constants.trackwidth, Constants.wheelBase),
+    new Translation2d(-Constants.trackwidth/2, Constants.wheelBase/2),
     //back Right
-    new Translation2d(-Constants.trackwidth, -Constants.wheelBase)  
+    new Translation2d(-Constants.trackwidth/2, -Constants.wheelBase/2)  
   );
 
   private final SwerveModule frontLeftModule;
