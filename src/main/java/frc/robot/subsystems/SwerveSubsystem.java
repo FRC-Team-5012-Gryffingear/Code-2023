@@ -45,9 +45,10 @@ import frc.robot.Constants;
 
   public static final double Voltage = 12.0;
 
-  public static final double Max_Velocity =  6380.0 / 60 * SdsModuleConfigurations.MK4_L1.getDriveReduction() * SdsModuleConfigurations.MK4_L1.getWheelDiameter() * Math.PI;
+  //change back to static if needed
+  public final double Max_Velocity =  6380.0 / 60 * SdsModuleConfigurations.MK4_L1.getDriveReduction() * SdsModuleConfigurations.MK4_L1.getWheelDiameter() * Math.PI;
 
-  public static final double Max_Angle = Max_Velocity / Math.hypot(Constants.trackwidth/2, Constants.wheelBase/2);
+  public final double Max_Angle = Max_Velocity / Math.hypot(Constants.trackwidth/2, Constants.wheelBase/2);
 
 
 

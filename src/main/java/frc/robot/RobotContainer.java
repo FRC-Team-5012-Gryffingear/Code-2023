@@ -39,12 +39,18 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    swerve.setDefaultCommand(new swerveCommand(swerve,
-    () -> -modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_X)) * swerve.Max_Velocity,
-    () -> -modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_Y)) * swerve.Max_Velocity,
-    () -> -modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_X)) * swerve.Max_Angle,
+
+    // swerve.setDefaultCommand(new swerveCommand(swerve,
+    // () -> -modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_X)) * swerve.Max_Velocity,
+    // () -> -modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_Y)) * swerve.Max_Velocity,
+    // () -> -modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_X)) * swerve.Max_Angle,
+    // () -> driver.getRawButton(controllerConstant.B)));
+    // // Configure the trigger bindings
+    swerve.setDefaultCommand(new swerveCommand(swerve, 
+    () -> -modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_X)) * swerve.Max_Velocity,
+    () -> -modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_Y)) * swerve.Max_Velocity,
+    () -> -modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_X)) * swerve.Max_Angle,
     () -> driver.getRawButton(controllerConstant.B)));
-    // Configure the trigger bindings
     
     configureBindings();
   }
