@@ -43,7 +43,7 @@ import frc.robot.Constants;
   CANCoder test3 = new CANCoder(Constants.Back_LeftSTEER_Encoder);
   CANCoder test4 = new CANCoder(Constants.Back_RightSTEER_Encoder);
 
-  public static final double Voltage = 12.0;
+  public static final double Voltage = 12.0; 
 
   //change back to static if needed
   public final double Max_Velocity =  6380.0 / 60 * SdsModuleConfigurations.MK4_L1.getDriveReduction() * SdsModuleConfigurations.MK4_L1.getWheelDiameter() * Math.PI;
