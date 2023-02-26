@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
+import frc.robot.commands.swerveCommand;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -12,7 +13,7 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {
+public class Constants {
     //in meters
     public static final double trackwidth = 0.5207;
     public static final double wheelBase = 0.6541;
@@ -26,21 +27,21 @@ public final class Constants {
     public static final int Front_LeftDRIVEMotor = 1;
     public static final int Front_LeftSTEERMotor = 2;
     public static final int Front_LeftSTEER_Encoder = 3;
-    public static final double Front_LeftSTEER_Offset = -Math.toRadians(45.0);
+    public static final double Front_LeftSTEER_Offset = -Math.toRadians(143.5);
 
     public static final int Front_RightDRIVEMotor =4;
     public static final int Front_RightSTEERMotor = 5;
-    public static final int Front_RightSTEER_Encoder = 6;
-    public static final double Front_RightSTEER_Offset = -Math.toRadians(45.0);
+    public static  int Front_RightSTEER_Encoder = 6;
+    public static double Front_RightSTEER_Offset = -Math.toRadians(180  );
 
     public static final int Back_LeftDRIVEMotor = 7;
     public static final int Back_LeftSTEERMotor = 8;
-    public static final int Back_LeftSTEER_Encoder = 16;
-    public static final double Back_LeftSTEER_Offset = -Math.toRadians(45.0);
+    public static  int Back_LeftSTEER_Encoder = 9;
+    public static double Back_LeftSTEER_Offset = -Math.toRadians(40.5);
     
     public static final int Back_RightDRIVEMotor = 10;
-    public static final int Back_RightSTEERMotor = 9;
-    public static final int Back_RightSTEER_Encoder = 12;
-    public static final double Back_RIGHTSTEER_Offset = -Math.toRadians(45.0);
+    public static final int Back_RightSTEERMotor = 11;
+    public static  int Back_RightSTEER_Encoder = 12;
+    public static final double Back_RIGHTSTEER_Offset = -Math.toRadians(241.8);
   
 }     

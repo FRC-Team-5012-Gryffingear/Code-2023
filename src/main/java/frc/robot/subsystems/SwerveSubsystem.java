@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.Pigeon2;
 import com.ctre.phoenix.sensors.PigeonIMU;
@@ -25,6 +27,7 @@ import edu.wpi.first.math.trajectory.constraint.SwerveDriveKinematicsConstraint;
 import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -37,11 +40,16 @@ import frc.robot.Constants;
   // distance between wheels Left to right 
   PigeonIMU pigeon = new PigeonIMU(Constants.pigeonID);
 
+  TalonFX SteeringFR = new TalonFX(Constants.Front_RightSTEERMotor);
+  TalonFX SteeringFL = new TalonFX(Constants.Front_LeftSTEERMotor);
+  TalonFX SteeringBR = new TalonFX(Constants.Back_RightSTEERMotor);
+  TalonFX SteeringBL = new TalonFX(Constants.Back_LeftSTEERMotor);
 
-  CANCoder test1 = new CANCoder(Constants.Front_LeftSTEER_Encoder);
-  CANCoder test2 = new CANCoder(Constants.Front_RightSTEER_Encoder);
-  CANCoder test3 = new CANCoder(Constants.Back_LeftSTEER_Encoder);
-  CANCoder test4 = new CANCoder(Constants.Back_RightSTEER_Encoder);
+
+  CANCoder FL = new CANCoder(Constants.Front_LeftSTEER_Encoder);
+  CANCoder FR = new CANCoder(Constants.Front_RightSTEER_Encoder);
+  CANCoder BL = new CANCoder(Constants.Back_LeftSTEER_Encoder);
+  CANCoder BR = new CANCoder(Constants.Back_RightSTEER_Encoder);
 
   public static final double Voltage = 12.0; 
 
@@ -89,7 +97,8 @@ import frc.robot.Constants;
     baseSpeed = chassisSpeeds;
   }
   
-
+  
+//zeros heading makes the face its looking the 'Forward'
   public void zeroGyro(boolean boom){
     pigeon.setFusedHeading(0.0);
   }
@@ -102,15 +111,19 @@ import frc.robot.Constants;
     SwerveModuleState[] states = SwerveKinematics.toSwerveModuleStates(baseSpeed);
     SwerveDriveKinematics.desaturateWheelSpeeds(states, Max_Velocity);
 
-    frontLeftModule.set(states[0].speedMetersPerSecond / Max_Velocity * Voltage, states[0].angle.getRadians());
-    frontRightModule.set(states[1].speedMetersPerSecond / Max_Velocity * Voltage, states[1].angle.getRadians());
+    frontLeftModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
+    frontRightModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
     backLeftModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
-    backRightModule.set(states[3].speedMetersPerSecond / Max_Velocity * Voltage, states[3].angle.getRadians());
+    backRightModule.set(states[0].speedMetersPerSecond / Max_Velocity * Voltage, states[0].angle.getRadians());
 
-    SmartDashboard.putNumber("One Encoder", test1.getAbsolutePosition());
-    SmartDashboard.putNumber("Two Encoder", test2.getAbsolutePosition());
-    SmartDashboard.putNumber("Four Encoder", test3.getAbsolutePosition());
-    SmartDashboard.putNumber("Three Encoder", test4.getAbsolutePosition());
+    SmartDashboard.putNumber("Front right", FR.getAbsolutePosition());
+    SmartDashboard.putNumber("Front Left", FL.getAbsolutePosition());
+    SmartDashboard.putNumber("Back Left", BL.getAbsolutePosition());
+    SmartDashboard.putNumber("Back Right", BR.getAbsolutePosition());
+    //FR = 185 deg
+    //FL = 194.5 deg
+    //BR = 107.5
+    //BL = 262.5
   }
 
   @Override
