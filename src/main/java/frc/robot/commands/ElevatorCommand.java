@@ -7,6 +7,7 @@ package frc.robot.commands;
 import frc.robot.subsystems.Elevatorsubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.networktables.DoubleSubscriber;
@@ -17,16 +18,16 @@ public class ElevatorCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   //private final ExampleSubsystem m_subsystem;
     private final Elevatorsubsystem ElevaSubsystem;
-    private final DoubleSupplier Upward, Downward;
+    private final BooleanSupplier Inward, Outward;
   /**
    * Creates a new ElevatorCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ElevatorCommand(Elevatorsubsystem subsystem, DoubleSupplier Up, DoubleSupplier Down) {
+  public ElevatorCommand(Elevatorsubsystem subsystem, BooleanSupplier In, BooleanSupplier Out) {
     ElevaSubsystem = subsystem;
-    Upward = Up;
-    Downward = Down;
+    Inward = In;
+    Outward = Out;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -38,7 +39,7 @@ public class ElevatorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ElevaSubsystem.ElevatorMovement(Upward.getAsDouble() - Downward.getAsDouble());
+    ElevaSubsystem.Extendermoment(Inward.getAsBoolean(), Outward.getAsBoolean());
   }
 
   // Called once the command ends or is interrupted.

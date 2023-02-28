@@ -8,6 +8,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Extendersubsystem;
 
 import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -16,17 +17,17 @@ public class ExtenderCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   //private final ExampleSubsystem m_subsystem;
     private final Extendersubsystem ExSubsystem;
-    private final BooleanSupplier Out, In;
-
+    //private final BooleanSupplier Out, In;
+    private final DoubleSupplier powers, outpower;
   /**
    * Creates a new ExtenderCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ExtenderCommand(Extendersubsystem subsystem, BooleanSupplier Inward, BooleanSupplier Outward) {
+  public ExtenderCommand(Extendersubsystem subsystem, DoubleSupplier motion, DoubleSupplier back) {
     ExSubsystem = subsystem;
-    Out = Outward;
-    In = Inward;
+    powers = motion;
+    outpower = back;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -38,7 +39,7 @@ public class ExtenderCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ExSubsystem.EnxtendingMovement(Out.getAsBoolean(), In.getAsBoolean());
+    ExSubsystem.Elevations(powers.getAsDouble() - outpower.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.

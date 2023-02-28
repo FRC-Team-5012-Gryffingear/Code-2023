@@ -33,8 +33,17 @@ public class Elevatorsubsystem extends SubsystemBase {
     ElevaM2.setInverted(InvertType.FollowMaster);
   }
   
-  public void ElevatorMovement(double power){
-    ElevaM1.set(ControlMode.PercentOutput, power);
+  // public void ElevatorMovement(double power){
+  //   ElevaM1.set(ControlMode.PercentOutput, power);
+  // }
+  public void Extendermoment(boolean in, boolean out){
+    ElevaM1.set(ControlMode.PercentOutput, 0);
+    if(out){
+      ElevaM1.set(ControlMode.PercentOutput, -1);
+    }
+    if(in){
+      ElevaM1.set(ControlMode.PercentOutput, 1);
+    }
   }
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).

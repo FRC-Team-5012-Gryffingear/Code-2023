@@ -58,17 +58,17 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    ElevSubsys.setDefaultCommand(new ElevatorCommand(ElevSubsys, 
-    () -> operatorController.getRawAxis(controllerConstant.RIGHT_TRIGGER), 
-    () -> operatorController.getRawAxis(controllerConstant.LEFT_TRIGGER)));
-
     Intakesubsys.setDefaultCommand(new IntakeCommand(Intakesubsys, 
     () -> operatorController.getRawButton(controllerConstant.B),
     () -> operatorController.getRawButton(controllerConstant.A)));
 
-    Extendsubsys.setDefaultCommand(new ExtenderCommand(Extendsubsys,
-    () -> operatorController.getRawButton(controllerConstant.RB), 
+    ElevSubsys.setDefaultCommand(new ElevatorCommand(ElevSubsys,
+    () -> operatorController.getRawButton(controllerConstant.RB),
     () -> operatorController.getRawButton(controllerConstant.LB)));
+
+    Extendsubsys.setDefaultCommand(new ExtenderCommand(Extendsubsys,
+    () -> operatorController.getRawAxis(controllerConstant.RIGHT_TRIGGER), 
+    () -> operatorController.getRawAxis(controllerConstant.LEFT_TRIGGER)));
 
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     //new Trigger(m_exampleSubsystem::exampleCondition)

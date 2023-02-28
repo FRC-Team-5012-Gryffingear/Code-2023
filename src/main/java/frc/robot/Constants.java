@@ -16,6 +16,7 @@ public final class Constants {
   public static int DriverController = 0;
   public static int OperatorController = 1;
 //cant be 7,8,10,2,4,5,15,1
+// 3 = 15, 9 = 16
   public static final int NeoIntake1 = 3;
   //Port 3s motor direction POSITIVE should move outward and NEGATIVE should move inward
   public static final int NeoIntake2 = 9;

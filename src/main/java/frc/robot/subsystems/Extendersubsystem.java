@@ -24,16 +24,19 @@ public class Extendersubsystem extends SubsystemBase {
     NeoEx1.setIdleMode(IdleMode.kBrake);
     NeoEx2.setIdleMode(IdleMode.kBrake);
 
-    NeoEx2.follow(NeoEx1, true);
+    NeoEx2.follow(NeoEx1, false);
   }
-  public void EnxtendingMovement(boolean out, boolean in){
-    NeoEx1.set(0);
-    if(in){
-        NeoEx1.set(-1);
-    }
-    if(out){
-        NeoEx1.set(1);
-    }
+  // public void EnxtendingMovement(boolean out, boolean in){
+  //   NeoEx1.set(0);
+  //   if(in){
+  //       NeoEx1.set(-1);
+  //   }
+  //   if(out){
+  //       NeoEx1.set(1);
+  //   }
+  // }
+  public void Elevations(double power){
+    NeoEx1.set(power);
   }
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
