@@ -57,8 +57,8 @@ public class RobotContainer {
     // () -> driver.getRawButton(controllerConstant.B)));
     // // Configure the trigger bindings
     swerve.setDefaultCommand(new swerveCommand(swerve, 
-    () -> -modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_X)) * swerve.Max_Velocity,
     () -> modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_Y)) * swerve.Max_Velocity,
+    () -> modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_X)) * swerve.Max_Velocity,
     () -> modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_X)) * swerve.Max_Angle,
     () -> driver.getRawButton(controllerConstant.B)));
     
