@@ -24,6 +24,15 @@ public class Constants {
 // FIX ME IDS
     public static final int pigeonID = 0;
 
+    public static final int NeoElevator1 = 14;
+    public static final int NeoElevator2 = 13;
+
+    public static final int NeoIntake1 = 15;
+    public static final int NeoIntake2 = 16;
+
+    public static final int Extender1 = 100;
+    public static final int Extender2 = 100;
+
     public static final int Front_LeftDRIVEMotor = 1;
     public static final int Front_LeftSTEERMotor = 2;
     public static final int Front_LeftSTEER_Encoder = 3;
@@ -32,7 +41,7 @@ public class Constants {
     public static final int Front_RightDRIVEMotor =4;
     public static final int Front_RightSTEERMotor = 5;
     public static  int Front_RightSTEER_Encoder = 6;
-    public static double Front_RightSTEER_Offset = -Math.toRadians(180  );
+    public static double Front_RightSTEER_Offset = -Math.toRadians(180 );
 
     public static final int Back_LeftDRIVEMotor = 7;
     public static final int Back_LeftSTEERMotor = 8;
