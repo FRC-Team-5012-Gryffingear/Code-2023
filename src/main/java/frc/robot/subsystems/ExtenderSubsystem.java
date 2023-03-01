@@ -23,11 +23,11 @@ public class ExtenderSubsystem extends SubsystemBase {
   TalonSRX CIM2 = new TalonSRX(Constants.Extender2);
 
   public ExtenderSubsystem() {
-    CIM1.setNeutralMode(NeutralMode.Brake);
-    CIM2.setNeutralMode(NeutralMode.Brake);
-
     CIM1.configFactoryDefault();
     CIM2.configFactoryDefault();
+
+    CIM1.setNeutralMode(NeutralMode.Brake);
+    CIM2.setNeutralMode(NeutralMode.Brake);
 
     CIM2.setInverted(InvertType.InvertMotorOutput);
     CIM2.follow(CIM1,FollowerType.PercentOutput);

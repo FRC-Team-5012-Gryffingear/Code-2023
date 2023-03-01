@@ -24,11 +24,8 @@ public class swerveCommand extends CommandBase {
   private final DoubleSupplier Xsupply;
   private final DoubleSupplier Ysupply;
   public final DoubleSupplier rotationSupply;
-
   
   private final BooleanSupplier zero;
-  
-
   /**
    * Creates a new swerveCommand.
    *
