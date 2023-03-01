@@ -111,10 +111,10 @@ import frc.robot.Constants;
     SwerveModuleState[] states = SwerveKinematics.toSwerveModuleStates(baseSpeed);
     SwerveDriveKinematics.desaturateWheelSpeeds(states, Max_Velocity);
 
-    frontLeftModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
-    frontRightModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
+    frontLeftModule.set(states[0].speedMetersPerSecond / Max_Velocity * Voltage, states[0].angle.getRadians());
+    frontRightModule.set(states[1].speedMetersPerSecond / Max_Velocity * Voltage, states[1].angle.getRadians());
     backLeftModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
-    backRightModule.set(states[0].speedMetersPerSecond / Max_Velocity * Voltage, states[0].angle.getRadians());
+    backRightModule.set(states[3].speedMetersPerSecond / Max_Velocity * Voltage, states[3].angle.getRadians());
 
     SmartDashboard.putNumber("Front right", FR.getAbsolutePosition());
     SmartDashboard.putNumber("Front Left", FL.getAbsolutePosition());
