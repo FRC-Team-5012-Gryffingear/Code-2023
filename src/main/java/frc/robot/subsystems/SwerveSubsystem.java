@@ -38,7 +38,7 @@ import frc.robot.Constants;
   public class SwerveSubsystem extends SubsystemBase {
   /** Creates a new SwerveSubsystem. */
   // distance between wheels Left to right 
-  PigeonIMU pigeon = new PigeonIMU(Constants.pigeonID);
+  Pigeon2 pigeon = new Pigeon2(Constants.pigeonID);
 
   TalonFX SteeringFR = new TalonFX(Constants.Front_RightSTEERMotor);
   TalonFX SteeringFL = new TalonFX(Constants.Front_LeftSTEERMotor);
@@ -99,11 +99,16 @@ import frc.robot.Constants;
   
   
 //zeros heading makes the face its looking the 'Forward'
-  public void zeroGyro(boolean boom){
-    pigeon.setFusedHeading(0.0);
+  public void zeroGyro(){
+    pigeon.setYaw(0.0);
+  }
+  public void zeroManual(boolean press){
+    if(press){
+      pigeon.setYaw(0.0);
+    }
   }
   public Rotation2d getGyro(){
-    return Rotation2d.fromDegrees(pigeon.getFusedHeading());
+    return Rotation2d.fromDegrees(pigeon.getYaw());
   }
   @Override
   public void periodic() {
@@ -121,7 +126,7 @@ import frc.robot.Constants;
     SmartDashboard.putNumber("Back Left", BL.getAbsolutePosition());
     SmartDashboard.putNumber("Back Right", BR.getAbsolutePosition());
 
-    SmartDashboard.putNumber("Pigeon degrees", pigeon.getFusedHeading());
+    SmartDashboard.putNumber("Pigeon degrees", pigeon.getYaw());
     //FR = 185 deg
     //FL = 194.5 deg
     //BR = 107.5

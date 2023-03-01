@@ -44,7 +44,9 @@ public class swerveCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    swerve.zeroGyro();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -54,7 +56,7 @@ public class swerveCommand extends CommandBase {
         Ysupply.getAsDouble(), 
         rotationSupply.getAsDouble(), 
         swerve.getGyro()));
-    swerve.zeroGyro(zero.getAsBoolean());
+    swerve.zeroManual(zero.getAsBoolean());
     //Constants.Front_RightSTEER_Offset = -Math.toRadians(324);
     //Constants.Back_LeftSTEER_Offset = -Math.toRadians(40.5);
      // Encoder Ports
