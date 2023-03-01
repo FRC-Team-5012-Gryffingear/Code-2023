@@ -120,6 +120,8 @@ import frc.robot.Constants;
     SmartDashboard.putNumber("Front Left", FL.getAbsolutePosition());
     SmartDashboard.putNumber("Back Left", BL.getAbsolutePosition());
     SmartDashboard.putNumber("Back Right", BR.getAbsolutePosition());
+
+    SmartDashboard.putNumber("Pigeon degrees", pigeon.getFusedHeading());
     //FR = 185 deg
     //FL = 194.5 deg
     //BR = 107.5
