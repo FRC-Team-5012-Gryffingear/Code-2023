@@ -9,6 +9,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,6 +19,8 @@ public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   CANSparkMax NeoIntake1 = new CANSparkMax(Constants.NeoIntake1, MotorType.kBrushless);
   CANSparkMax NeoIntake2 = new CANSparkMax(Constants.NeoIntake2, MotorType.kBrushless);
+
+  Servo Servs = new Servo(9);
 
   public IntakeSubsystem() {
     NeoIntake1.setIdleMode(IdleMode.kBrake);
@@ -35,10 +39,16 @@ public class IntakeSubsystem extends SubsystemBase {
         NeoIntake1.set(-1);
     }
   }
+  public void servo(boolean moves){
+    //Servs.set(1);
+    Servs.setAngle(180);
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Servo Angle", Servs.getAngle());
+    SmartDashboard.putNumber("Servo Position", Servs.get());
   }
 
   @Override

@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants;
+import frc.robot.commands.AutoComs;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.ExampleCommand;
@@ -36,12 +37,14 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand command = new ExampleCommand(m_exampleSubsystem);
 
+
     // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem swerve = new SwerveSubsystem();
   private final IntakeSubsystem intakesubsys = new IntakeSubsystem();
   private final ExtenderSubsystem extendo = new ExtenderSubsystem();
   private final ElevatorSubsystem elevator = new ElevatorSubsystem();
 
+  private final AutoComs comman = new AutoComs(intakesubsys);
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
   private final Joystick driver = new Joystick(Constants.driverController);
@@ -103,7 +106,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return (command);
+    return (comman);
   }
   private static double deadband(double val, double deadband){
     if(Math.abs(val) > deadband){
