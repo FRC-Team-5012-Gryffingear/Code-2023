@@ -18,10 +18,23 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
+
+import java.util.List;
+
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -49,7 +62,6 @@ public class RobotContainer {
 
   private final Joystick driver = new Joystick(Constants.driverController);
   private final Joystick operator = new Joystick(Constants.operatorController);
-
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
@@ -106,8 +118,25 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return (comman);
+// return (comman);
+    TrajectoryConfig trajectoryConfig = new TrajectoryConfig(swerve.Max_Velocity, 3).setKinematics(swerve.SwerveKinematics);
+    //Trajectory of bot
+    Trajectory trajects = TrajectoryGenerator.generateTrajectory(new Pose2d(0,0, new Rotation2d(0)),
+     List.of(
+      new Translation2d(1, 0),
+      new Translation2d(1,-1)
+     ), new Pose2d(2,-1, Rotation2d.fromDegrees(180)),
+     trajectoryConfig);
+
+     SwerveControllerCommand swerveControllerCommands = new SwerveControllerCommand(trajects, swerve::getPose, swerve.SwerveKinematics, null, swerve::setModuleStates, swerve);
+
+
+    return new SequentialCommandGroup(new InstantCommand(() -> swerve.resetOdometry(trajects.getInitialPose())),
+    swerveControllerCommands, 
+    new InstantCommand(() -> swerve.drive(new ChassisSpeeds(0,0,0))));
   }
+
+
   private static double deadband(double val, double deadband){
     if(Math.abs(val) > deadband){
       if(val > 0){
