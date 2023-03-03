@@ -30,8 +30,8 @@ public class Constants {
     public static final int NeoIntake1 = 15;
     public static final int NeoIntake2 = 16;
 
-    public static final int Extender1 = 100;
-    public static final int Extender2 = 100;
+    public static final int Extender1 = 17;
+    public static final int Extender2 = 18;
 
     public static final int Front_LeftDRIVEMotor = 1;
     public static final int Front_LeftSTEERMotor = 2;

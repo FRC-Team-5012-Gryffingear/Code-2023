@@ -33,13 +33,11 @@ public class AutoComs extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-     m_Subsystem.servo(true);
     
   }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Subsystem.servo(false);
   }
   // Returns true when the command should end.
   @Override

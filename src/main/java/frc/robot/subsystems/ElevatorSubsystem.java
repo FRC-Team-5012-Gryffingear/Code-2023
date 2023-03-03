@@ -27,7 +27,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public void Movement(double power){
-    NeoElev1.set(power/2);
+    NeoElev1.set(power);
   }
   
   @Override

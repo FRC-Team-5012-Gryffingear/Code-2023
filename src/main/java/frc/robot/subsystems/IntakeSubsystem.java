@@ -33,15 +33,11 @@ public class IntakeSubsystem extends SubsystemBase {
   public void Intake(boolean in, boolean out){
     NeoIntake1.set(0);
     if(out){
-        NeoIntake1.set(1);
+        NeoIntake1.set(0.5);
     }
     if(in){
-        NeoIntake1.set(-1);
+        NeoIntake1.set(-0.5);
     }
-  }
-  public void servo(boolean moves){
-    //Servs.set(1);
-    Servs.setAngle(180);
   }
 
   @Override
