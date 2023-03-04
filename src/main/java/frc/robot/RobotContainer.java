@@ -44,7 +44,7 @@ public class RobotContainer {
   private final ExtenderSubsystem extendo = new ExtenderSubsystem();
   private final ElevatorSubsystem elevator = new ElevatorSubsystem();
 
-  private final AutoComs comman = new AutoComs(intakesubsys);
+  private final AutoComs comman = new AutoComs(swerve);
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
   private final Joystick driver = new Joystick(Constants.driverController);

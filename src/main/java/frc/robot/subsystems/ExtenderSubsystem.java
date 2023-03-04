@@ -38,10 +38,10 @@ public class ExtenderSubsystem extends SubsystemBase {
   public void Extending(boolean in, boolean out){
     CIM1.set(ControlMode.PercentOutput, 0);
     if(out){
-        CIM1.set(ControlMode.PercentOutput, 1);
+        CIM1.set(ControlMode.PercentOutput, 0.5);
     }
     if(in){
-        CIM1.set(ControlMode.PercentOutput, -1);
+        CIM1.set(ControlMode.PercentOutput, -0.5);
     }
   }
   

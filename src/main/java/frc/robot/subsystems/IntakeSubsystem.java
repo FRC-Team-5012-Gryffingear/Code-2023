@@ -26,17 +26,19 @@ public class IntakeSubsystem extends SubsystemBase {
     NeoIntake1.setIdleMode(IdleMode.kBrake);
     NeoIntake2.setIdleMode(IdleMode.kBrake);
 
-    NeoIntake2.setInverted(true);
-    NeoIntake2.follow(NeoIntake1);
+    //NeoIntake2.setInverted(true);
   }
 
   public void Intake(boolean in, boolean out){
     NeoIntake1.set(0);
+    NeoIntake2.set(0);
     if(out){
-        NeoIntake1.set(0.5);
-    }
+        NeoIntake1.set(0.125);
+        NeoIntake2.set(-0.125);
+      }
     if(in){
-        NeoIntake1.set(-0.5);
+        NeoIntake1.set(-0.125);
+        NeoIntake2.set(0.125);
     }
   }
 
