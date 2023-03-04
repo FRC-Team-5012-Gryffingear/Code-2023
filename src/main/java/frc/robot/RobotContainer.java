@@ -118,22 +118,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-// return (comman);
-    TrajectoryConfig trajectoryConfig = new TrajectoryConfig(swerve.Max_Velocity, 3).setKinematics(swerve.SwerveKinematics);
-    //Trajectory of bot
-    Trajectory trajects = TrajectoryGenerator.generateTrajectory(new Pose2d(0,0, new Rotation2d(0)),
-     List.of(
-      new Translation2d(1, 0),
-      new Translation2d(1,-1)
-     ), new Pose2d(2,-1, Rotation2d.fromDegrees(180)),
-     trajectoryConfig);
-
-     SwerveControllerCommand swerveControllerCommands = new SwerveControllerCommand(trajects, swerve::getPose, swerve.SwerveKinematics, null, swerve::setModuleStates, swerve);
-
-
-    return new SequentialCommandGroup(new InstantCommand(() -> swerve.resetOdometry(trajects.getInitialPose())),
-    swerveControllerCommands, 
-    new InstantCommand(() -> swerve.drive(new ChassisSpeeds(0,0,0))));
+  return (comman);
   }
 
 

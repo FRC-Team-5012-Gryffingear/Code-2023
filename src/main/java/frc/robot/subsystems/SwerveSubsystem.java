@@ -121,8 +121,7 @@ import frc.robot.Constants;
   public void periodic() {
     // This method will be called once per scheduler run
     //FIXME destroy odometry if it doesnt work
-    odometry.update(getGyro(), null);
-/*
+
  SwerveModuleState[] states = SwerveKinematics.toSwerveModuleStates(baseSpeed);
     SwerveDriveKinematics.desaturateWheelSpeeds(states, Max_Velocity);
 
@@ -130,7 +129,6 @@ import frc.robot.Constants;
     frontRightModule.set(states[1].speedMetersPerSecond / Max_Velocity * Voltage, states[1].angle.getRadians());
     backLeftModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
     backRightModule.set(states[3].speedMetersPerSecond / Max_Velocity * Voltage, states[3].angle.getRadians());
-  */
    
     SmartDashboard.putNumber("Front right", FR.getAbsolutePosition());
     SmartDashboard.putNumber("Front Left", FL.getAbsolutePosition());
@@ -143,24 +141,7 @@ import frc.robot.Constants;
     //BR = 107.5
     //BL = 262.5
   }//FIXME destroy setmoduleStates
-  public void setModuleStates(SwerveModuleState[] desiredstates){
-    SwerveDriveKinematics.desaturateWheelSpeeds(desiredstates, Max_Velocity);
-
-    frontLeftModule.set(desiredstates[0].speedMetersPerSecond / Max_Velocity * Voltage, desiredstates[0].angle.getRadians());
-    frontRightModule.set(desiredstates[1].speedMetersPerSecond / Max_Velocity * Voltage, desiredstates[1].angle.getRadians());
-    backLeftModule.set(desiredstates[2].speedMetersPerSecond / Max_Velocity * Voltage, desiredstates[2].angle.getRadians());
-    backRightModule.set(desiredstates[3].speedMetersPerSecond / Max_Velocity * Voltage, desiredstates[3].angle.getRadians());
-  }
-
 //FIXME positions of the swerve might not work and destroy Pose2d
-  private final SwerveDriveOdometry odometry = new SwerveDriveOdometry(SwerveKinematics, getGyro(), null);
-
-  public Pose2d getPose(){
-    return odometry.getPoseMeters();
-  }
-  public void resetOdometry(Pose2d pose){
-    odometry.resetPosition(getGyro(),null, pose);
-  }
 
   @Override
   public void simulationPeriodic() {
