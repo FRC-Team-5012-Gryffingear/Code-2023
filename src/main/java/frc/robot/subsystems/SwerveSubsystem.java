@@ -16,12 +16,14 @@ import com.swervedrivespecialties.swervelib.Mk4SwerveModuleHelper;
 import com.swervedrivespecialties.swervelib.SdsModuleConfigurations;
 import com.swervedrivespecialties.swervelib.SwerveModule;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 // import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
 // import edu.wpi.first.wpilibj.kinematics.SwerveModuleState;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.constraint.SwerveDriveKinematicsConstraint;
 import edu.wpi.first.wpilibj.AnalogEncoder;
@@ -102,25 +104,34 @@ import frc.robot.Constants;
   public void zeroGyro(){
     pigeon.setYaw(0.0);
   }
+
   public void zeroManual(boolean press){
     if(press){
       pigeon.setYaw(0.0);
     }
   }
+
   public Rotation2d getGyro(){
     return Rotation2d.fromDegrees(pigeon.getYaw());
   }
+//FIXME encoder and function might not work for getsState function
+ 
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SwerveModuleState[] states = SwerveKinematics.toSwerveModuleStates(baseSpeed);
+    //FIXME destroy odometry if it doesnt work
+    odometry.update(getGyro(), null);
+/*
+ SwerveModuleState[] states = SwerveKinematics.toSwerveModuleStates(baseSpeed);
     SwerveDriveKinematics.desaturateWheelSpeeds(states, Max_Velocity);
 
     frontLeftModule.set(states[0].speedMetersPerSecond / Max_Velocity * Voltage, states[0].angle.getRadians());
     frontRightModule.set(states[1].speedMetersPerSecond / Max_Velocity * Voltage, states[1].angle.getRadians());
     backLeftModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
     backRightModule.set(states[3].speedMetersPerSecond / Max_Velocity * Voltage, states[3].angle.getRadians());
-
+  */
+   
     SmartDashboard.putNumber("Front right", FR.getAbsolutePosition());
     SmartDashboard.putNumber("Front Left", FL.getAbsolutePosition());
     SmartDashboard.putNumber("Back Left", BL.getAbsolutePosition());
@@ -131,10 +142,31 @@ import frc.robot.Constants;
     //FL = 194.5 deg
     //BR = 107.5
     //BL = 262.5
+  }//FIXME destroy setmoduleStates
+  public void setModuleStates(SwerveModuleState[] desiredstates){
+    SwerveDriveKinematics.desaturateWheelSpeeds(desiredstates, Max_Velocity);
+
+    frontLeftModule.set(desiredstates[0].speedMetersPerSecond / Max_Velocity * Voltage, desiredstates[0].angle.getRadians());
+    frontRightModule.set(desiredstates[1].speedMetersPerSecond / Max_Velocity * Voltage, desiredstates[1].angle.getRadians());
+    backLeftModule.set(desiredstates[2].speedMetersPerSecond / Max_Velocity * Voltage, desiredstates[2].angle.getRadians());
+    backRightModule.set(desiredstates[3].speedMetersPerSecond / Max_Velocity * Voltage, desiredstates[3].angle.getRadians());
+  }
+
+//FIXME positions of the swerve might not work and destroy Pose2d
+  private final SwerveDriveOdometry odometry = new SwerveDriveOdometry(SwerveKinematics, getGyro(), null);
+
+  public Pose2d getPose(){
+    return odometry.getPoseMeters();
+  }
+  public void resetOdometry(Pose2d pose){
+    odometry.resetPosition(getGyro(),null, pose);
   }
 
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
+
+
+ 
 }
