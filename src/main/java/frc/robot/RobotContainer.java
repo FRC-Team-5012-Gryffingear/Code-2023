@@ -82,8 +82,8 @@ public class RobotContainer {
     () -> operator.getRawAxis(controllerConstant.LEFT_TRIGGER)));
 
     intakesubsys.setDefaultCommand(new IntakeCommand(intakesubsys, 
-    () -> operator.getRawButton(controllerConstant.Y), 
-    () -> operator.getRawButton(controllerConstant.X)));
+    () -> operator.getRawButton(controllerConstant.X), 
+    () -> operator.getRawButton(controllerConstant.Y)));
 
     extendo.setDefaultCommand(new ExtenderCommand(extendo, 
     () -> operator.getRawButton(controllerConstant.RB), 

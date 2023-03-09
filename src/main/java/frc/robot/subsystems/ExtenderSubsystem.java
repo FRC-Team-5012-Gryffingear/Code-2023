@@ -29,7 +29,7 @@ public class ExtenderSubsystem extends SubsystemBase {
     CIM1.setNeutralMode(NeutralMode.Brake);
     CIM2.setNeutralMode(NeutralMode.Brake);
 
-    CIM2.setInverted(InvertType.InvertMotorOutput);
+    //CIM2.setInverted(InvertType.InvertMotorOutput);
     CIM2.follow(CIM1,FollowerType.PercentOutput);
 
     //wait to see if needed to invert
@@ -41,7 +41,7 @@ public class ExtenderSubsystem extends SubsystemBase {
         CIM1.set(ControlMode.PercentOutput, 0.5);
     }
     if(in){
-        CIM1.set(ControlMode.PercentOutput, -0.5);
+        CIM1.set(ControlMode.PercentOutput, -.5);
     }
   }
   

@@ -91,15 +91,12 @@ import frc.robot.Constants;
     frontRightModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1, Constants.Front_RightDRIVEMotor,Constants.Front_RightSTEERMotor,Constants.Front_RightSTEER_Encoder,Constants.Front_RightSTEER_Offset);
     backLeftModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1, Constants.Back_LeftDRIVEMotor, Constants.Back_LeftSTEERMotor, Constants.Back_LeftSTEER_Encoder, Constants.Back_LeftSTEER_Offset);
     backRightModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1, Constants.Back_RightDRIVEMotor, Constants.Back_RightSTEERMotor, Constants.Back_RightSTEER_Encoder, Constants.Back_RIGHTSTEER_Offset);
-
-
 }
 
   public void drive(ChassisSpeeds chassisSpeeds){
     baseSpeed = chassisSpeeds;
   }
-  
-  
+
 //zeros heading makes the face its looking the 'Forward'
   public void zeroGyro(){
     pigeon.setYaw(0.0);
@@ -114,14 +111,10 @@ import frc.robot.Constants;
   public Rotation2d getGyro(){
     return Rotation2d.fromDegrees(pigeon.getYaw());
   }
-//FIXME encoder and function might not work for getsState function
- 
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //FIXME destroy odometry if it doesnt work
-
  SwerveModuleState[] states = SwerveKinematics.toSwerveModuleStates(baseSpeed);
     SwerveDriveKinematics.desaturateWheelSpeeds(states, Max_Velocity);
 
@@ -140,9 +133,7 @@ import frc.robot.Constants;
     //FL = 194.5 deg
     //BR = 107.5
     //BL = 262.5
-  }//FIXME destroy setmoduleStates
-//FIXME positions of the swerve might not work and destroy Pose2d
-
+  }
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
