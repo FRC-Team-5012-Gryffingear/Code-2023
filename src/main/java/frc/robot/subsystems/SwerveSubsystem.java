@@ -97,6 +97,7 @@ import frc.robot.Constants;
     baseSpeed = chassisSpeeds;
   }
 
+
 //zeros heading makes the face its looking the 'Forward'
   public void zeroGyro(){
     pigeon.setYaw(0.0);
@@ -111,6 +112,27 @@ import frc.robot.Constants;
   public Rotation2d getGyro(){
     return Rotation2d.fromDegrees(pigeon.getYaw());
   }
+
+ //Turning
+ public double Yaw(){
+  double test = pigeon.getYaw();
+  SmartDashboard.putNumber("RAW YAW", test);
+  return test;
+}
+// Yaw detectors to see if the Yaw is out of place
+public boolean YawDetectL(){
+  if(Yaw() > 2 && Yaw() < 90){
+    return false;
+  }
+  return true;
+}
+
+public boolean YawDetectR(){
+  if(Yaw() < 358 && Yaw() > 270){
+    return false;
+  }
+  return true;
+}
 
   @Override
   public void periodic() {
