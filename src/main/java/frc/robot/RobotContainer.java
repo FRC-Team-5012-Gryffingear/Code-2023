@@ -57,6 +57,7 @@ public class RobotContainer {
   private final ExtenderSubsystem extendo = new ExtenderSubsystem();
   private final ElevatorSubsystem elevator = new ElevatorSubsystem();
 
+  private final Autos autos = new Autos(swerve);
   private final AutoComs comman = new AutoComs(swerve);
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -118,7 +119,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-  return (comman);
+  return (autos);
   }
 
 

@@ -113,7 +113,12 @@ import frc.robot.Constants;
     return Rotation2d.fromDegrees(pigeon.getYaw());
   }
 
- //Turning
+ //Turning and Pitch
+ public double Pitch(){
+  double testo = pigeon.getPitch();
+  SmartDashboard.putNumber("RAW PITCH", testo);
+  return testo;
+ }
  public double Yaw(){
   double test = pigeon.getYaw();
   SmartDashboard.putNumber("RAW YAW", test);
@@ -129,6 +134,19 @@ public boolean YawDetectL(){
 
 public boolean YawDetectR(){
   if(Yaw() < 358 && Yaw() > 270){
+    return false;
+  }
+  return true;
+}
+
+public boolean PitchDetectB(){
+  if(Pitch() > 10 && Pitch() <90){
+    return false;
+  }
+  return true;
+}
+public boolean PitchDetectF(){
+  if(Pitch() < 350 && Pitch() > 270){
     return false;
   }
   return true;
