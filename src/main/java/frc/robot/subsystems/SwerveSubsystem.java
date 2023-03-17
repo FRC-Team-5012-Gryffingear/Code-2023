@@ -121,35 +121,9 @@ import frc.robot.Constants;
  }
  public double Yaw(){
   double test = pigeon.getYaw();
-  SmartDashboard.putNumber("RAW YAW", test);
-  return test;
-}
-// Yaw detectors to see if the Yaw is out of place
-public boolean YawDetectL(){
-  if(Yaw() > 2 && Yaw() < 90){
-    return false;
-  }
-  return true;
-}
+  double angle = test * 360;
 
-public boolean YawDetectR(){
-  if(Yaw() < 358 && Yaw() > 270){
-    return false;
-  }
-  return true;
-}
-
-public boolean PitchDetectB(){
-  if(Pitch() > 10 && Pitch() <90){
-    return false;
-  }
-  return true;
-}
-public boolean PitchDetectF(){
-  if(Pitch() < 350 && Pitch() > 270){
-    return false;
-  }
-  return true;
+  return angle;
 }
 
   @Override
@@ -168,11 +142,21 @@ public boolean PitchDetectF(){
     SmartDashboard.putNumber("Back Left", BL.getAbsolutePosition());
     SmartDashboard.putNumber("Back Right", BR.getAbsolutePosition());
 
+    SmartDashboard.putNumber("Yaw angle", Yaw());
+
     SmartDashboard.putNumber("Pigeon degrees", pigeon.getYaw());
     //FR = 185 deg
     //FL = 194.5 deg
     //BR = 107.5
     //BL = 262.5
+    double Kp = 0.15;
+    double Ki = 0;
+    double target = 0;
+    double value = Yaw();
+    double error = target - value;
+    double integral = Ki + error;
+    double turn = (target - value) * Kp;
+    SmartDashboard.putNumber("Turning PID power", turn);
   }
   @Override
   public void simulationPeriodic() {

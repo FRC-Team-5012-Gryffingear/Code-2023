@@ -7,16 +7,10 @@ package frc.robot;
 import frc.robot.Constants;
 import frc.robot.commands.AutoComs;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.ExtenderCommand;
-import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.swerveCommand;
 import frc.robot.otherInfo.controllerConstant;
-import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.ExtenderSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
 import java.util.List;
@@ -53,10 +47,7 @@ public class RobotContainer {
 
     // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem swerve = new SwerveSubsystem();
-  private final IntakeSubsystem intakesubsys = new IntakeSubsystem();
-  private final ExtenderSubsystem extendo = new ExtenderSubsystem();
-  private final ElevatorSubsystem elevator = new ElevatorSubsystem();
-
+ 
   private final Autos autos = new Autos(swerve);
   private final AutoComs comman = new AutoComs(swerve);
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -78,18 +69,7 @@ public class RobotContainer {
     () -> modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_X)) * swerve.Max_Angle,
     () -> driver.getRawButton(controllerConstant.A)));
     
-    elevator.setDefaultCommand(new ElevatorCommand(elevator, 
-    () -> operator.getRawAxis(controllerConstant.RIGHT_TRIGGER), 
-    () -> operator.getRawAxis(controllerConstant.LEFT_TRIGGER)));
-
-    intakesubsys.setDefaultCommand(new IntakeCommand(intakesubsys, 
-    () -> operator.getRawButton(controllerConstant.X), 
-    () -> operator.getRawButton(controllerConstant.Y)));
-
-    extendo.setDefaultCommand(new ExtenderCommand(extendo, 
-    () -> operator.getRawButton(controllerConstant.RB), 
-    () -> operator.getRawButton(controllerConstant.LB)));
-    configureBindings();
+  
   }
 
   /**
