@@ -20,12 +20,12 @@ public class Constants {
   // 0.65405 if needed to change wheelbase 
     public static final int driverController = 0;
     public static final int operatorController = 1;
-
+    
 // FIX ME IDS
     public static final int pigeonID = 0;
 
-    public static final int NeoElevator1 = 14;
-    public static final int NeoElevator2 = 13;
+    public static final int Elevator1 = 101;
+    public static final int Elevator2 = 102;
 
     public static final int NeoIntake1 = 15;
     public static final int NeoIntake2 = 16;
@@ -41,7 +41,7 @@ public class Constants {
     public static final int Front_RightDRIVEMotor =4;
     public static final int Front_RightSTEERMotor = 5;
     public static  int Front_RightSTEER_Encoder = 6;
-    public static double Front_RightSTEER_Offset = -Math.toRadians(269.2);
+    public static double Front_RightSTEER_Offset = -Math.toRadians(269.2 - 28);
 //24.5
     public static final int Back_LeftDRIVEMotor = 7;
     public static final int Back_LeftSTEERMotor = 8;

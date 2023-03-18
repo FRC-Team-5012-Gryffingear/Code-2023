@@ -36,8 +36,10 @@ public class AutoComs extends CommandBase {
   @Override
   public void execute() {
   if(quick.get() > 0.5){
-    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(2, 0, 0, swerve.getGyro()));
-    
+    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-3, 0, 0, swerve.getGyro()));
+        if(quick.get() > 5){
+          swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0, swerve.getGyro()));
+        }
     //First 
       // if (quick.get() > 1.5){
       //   swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1,0,0, swerve.getGyro()));

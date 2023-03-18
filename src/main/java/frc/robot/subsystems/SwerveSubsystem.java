@@ -95,6 +95,7 @@ import frc.robot.Constants;
 
   public void drive(ChassisSpeeds chassisSpeeds){
     baseSpeed = chassisSpeeds;
+     
   }
 
 
@@ -121,9 +122,9 @@ import frc.robot.Constants;
  }
  public double Yaw(){
   double test = pigeon.getYaw();
-  double angle = test * 360;
-
-  return angle;
+  double angle = test % 360;
+  Rotation2d.fromDegrees(test % 360);
+  return 0;
 }
 
   @Override
@@ -149,14 +150,8 @@ import frc.robot.Constants;
     //FL = 194.5 deg
     //BR = 107.5
     //BL = 262.5
-    double Kp = 0.15;
-    double Ki = 0;
-    double target = 0;
-    double value = Yaw();
-    double error = target - value;
-    double integral = Ki + error;
-    double turn = (target - value) * Kp;
-    SmartDashboard.putNumber("Turning PID power", turn);
+    SmartDashboard.putNumber("RAWYAW", Yaw());
+    SmartDashboard.putNumber("RAWRAWYAW", pigeon.getYaw());
   }
   @Override
   public void simulationPeriodic() {

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import com.ctre.phoenix.sensors.Pigeon2;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,8 +20,10 @@ public class Autos extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   //private final ExampleSubsystem m_subsystem;
   private final SwerveSubsystem swerve;
-  private Timer quick = new Timer();
-  double target = 0;
+  private Timer times = new Timer();
+  private double target = 0;
+  private PIDController controller = new PIDController(0.02, 0, 0.02);
+
 
   /**
    * Creates a new Autos.
@@ -35,34 +38,25 @@ public class Autos extends CommandBase {
   @Override
   public void initialize() {
     swerve.zeroGyro();
-    quick.reset();
-    quick.start();
+    times.reset();
+    times.start();
   }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   //is it alligned
   public void execute() {
-
-    double Kp = 0.02;
-    double Ki = 0;
-    double target = 0;
-    double value = swerve.Yaw();
-    double error = target - value;
-    double integral = Ki + error;
-    double turn = (target - value) * Kp;
-    SmartDashboard.putNumber("Turning PID power", turn);
-  if(quick.get() > 0.5){
-    swerve.zeroGyro();
-    if(swerve.Yaw() > 1000){
-      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-0.15,0,turn,swerve.getGyro()));
-    } else if(swerve.Yaw() < -1000){
-      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-0.15,0,turn,swerve.getGyro()));
-    } 
-    else{
-      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-0.25,0,0,swerve.getGyro()));
-    }
+    swerve.Yaw();
+    double percent = swerve.Yaw() / 360;
+    //swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0, swerve.getGyro()));
+  if(times.get() > 0.5){
+   swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-0.5, 0, percent, swerve.getGyro()));
+   if(times.get() > 4){
+    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0, swerve.getGyro()));
+   }
+  }
+ 
     //   swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1,0,0, swerve.getGyro()));
-    // while(quick.get() > 0.5){
+    // while(times.get() > 0.5){
     //   if(!swerve.YawDetectL()){
     //     swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,0.25, swerve.getGyro()));
     //   } else if(!swerve.YawDetectR()){
@@ -80,13 +74,14 @@ public class Autos extends CommandBase {
   
       // }
     }
-  }
+  
   
     
   
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    swerve.drive(new ChassisSpeeds(0.0,0.0,0.0));
   }
   // Returns true when the command should end.
   @Override
