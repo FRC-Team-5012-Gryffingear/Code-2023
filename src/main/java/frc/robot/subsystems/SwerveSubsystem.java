@@ -124,7 +124,7 @@ import frc.robot.Constants;
   double test = pigeon.getYaw();
   double angle = test % 360;
   Rotation2d.fromDegrees(test % 360);
-  return 0;
+  return angle;
 }
 
   @Override
