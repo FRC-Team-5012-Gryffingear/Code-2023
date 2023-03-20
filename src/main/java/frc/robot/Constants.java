@@ -36,12 +36,12 @@ public class Constants {
     public static final int Front_LeftDRIVEMotor = 1;
     public static final int Front_LeftSTEERMotor = 2;
     public static final int Front_LeftSTEER_Encoder = 3;
-    public static final double Front_LeftSTEER_Offset = -Math.toRadians(280 - 45);
+    public static final double Front_LeftSTEER_Offset = -Math.toRadians(323 - 90);
 
     public static final int Front_RightDRIVEMotor =4;
     public static final int Front_RightSTEERMotor = 5;
     public static  int Front_RightSTEER_Encoder = 6;
-    public static double Front_RightSTEER_Offset = -Math.toRadians(265 - 28);
+    public static double Front_RightSTEER_Offset = -Math.toRadians(275 - 45);
 //24.5
     public static final int Back_LeftDRIVEMotor = 7;
     public static final int Back_LeftSTEERMotor = 8;
@@ -51,6 +51,6 @@ public class Constants {
     public static final int Back_RightDRIVEMotor = 10;
     public static final int Back_RightSTEERMotor = 11;
     public static  int Back_RightSTEER_Encoder = 12;
-    public static final double Back_RIGHTSTEER_Offset = -Math.toRadians(250 + 90);
+    public static final double Back_RIGHTSTEER_Offset = -Math.toRadians(245 + 90);
   
 }     
