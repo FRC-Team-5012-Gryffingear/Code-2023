@@ -116,10 +116,11 @@ import frc.robot.Constants;
 
  //Turning and Pitch
  public double Pitch(){
-  double testo = pigeon.getPitch();
-  SmartDashboard.putNumber("RAW PITCH", testo);
-  return testo;
+  double tester = pigeon.getPitch();
+  double angleP = tester % 360;
+  return angleP;
  }
+
  public double Yaw(){
   double test = pigeon.getYaw();
   double angle = test % 360;
@@ -146,11 +147,13 @@ import frc.robot.Constants;
     SmartDashboard.putNumber("Yaw angle", Yaw());
 
     SmartDashboard.putNumber("Pigeon degrees", pigeon.getYaw());
+    SmartDashboard.putNumber("Pigeon Pitch", pigeon.getPitch());
     //FR = 185 deg
     //FL = 194.5 deg
     //BR = 107.5
     //BL = 262.5
     SmartDashboard.putNumber("RAWYAW", Yaw());
+    SmartDashboard.putNumber("RAWPITCH", Pitch());
     SmartDashboard.putNumber("RAWRAWYAW", pigeon.getYaw());
   }
   @Override

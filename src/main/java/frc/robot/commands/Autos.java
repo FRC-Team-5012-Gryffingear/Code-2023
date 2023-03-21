@@ -46,10 +46,10 @@ public class Autos extends CommandBase {
   //is it alligned
   public void execute() {
     swerve.Yaw();
-    double percent = swerve.Yaw() / 360;
+    double percent = swerve.Yaw()/10;
     //swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0, swerve.getGyro()));
   if(times.get() > 0.5){
-   swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(percent, 0, 0, swerve.getGyro()));
+   swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-0.5, 0, percent, swerve.getGyro()));
    if(times.get() > 4){
     swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0, swerve.getGyro()));
    }
