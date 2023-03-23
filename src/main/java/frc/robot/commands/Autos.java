@@ -50,6 +50,9 @@ public class Autos extends CommandBase {
     double power = (1.25/36) * 100;
 
   if(times.get() > 0.5){
+   swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(1,0,0, swerve.getGyro()));
+   
+   if(times.get() > 3){
     if(Math.abs(percentPitch * 100) < power){
       swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,percent, swerve.getGyro()));
     }
@@ -59,9 +62,16 @@ public class Autos extends CommandBase {
     if(times.get() > 7){
       swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,0, swerve.getGyro()));
     } 
-
+   }
   }
  /*    
+IMPORTANT AUTO BAL MOMENTO START
+
+
+ 
+
+ENNDDEDEDEDEEEEEEEEEDEDDEDEDE
+
   if(times.get() > 0.5){
    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-0.5, 0, percent, swerve.getGyro()));
    if(times.get() > 2){

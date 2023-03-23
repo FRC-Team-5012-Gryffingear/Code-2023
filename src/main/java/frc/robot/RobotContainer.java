@@ -71,8 +71,8 @@ public class RobotContainer {
     () -> modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_X)) * swerve.Max_Velocity,
     () -> modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_X)) * swerve.Max_Angle,
     () -> driver.getRawButton(controllerConstant.A),
-    () -> driver.getRawButton(controllerConstant.B),
-    () -> driver.getRawButton(controllerConstant.X)));
+    () -> driver.getRawButton(controllerConstant.LB),
+    () -> driver.getRawButton(controllerConstant.RB)));
 
     elevsubsys.setDefaultCommand(new ElevatorCommand(elevsubsys,
     ()-> operator.getRawAxis(controllerConstant.RIGHT_TRIGGER), 

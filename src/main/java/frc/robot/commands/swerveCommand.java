@@ -14,6 +14,7 @@ import java.util.function.DoubleSupplier;
 import com.ctre.phoenix.sensors.CANCoder;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
@@ -54,8 +55,10 @@ public class swerveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     double percent = swerve.Yaw()/18;
-    double percent180 = (180 - swerve.Yaw())/18;
+    double percent180 = (180 - Math.abs(swerve.Yaw()))/18;
+    SmartDashboard.putNumber("percent180", percent180);
 
     if(return0.getAsBoolean()){
       swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(Xsupply.getAsDouble(), Ysupply.getAsDouble(),percent,swerve.getGyro()));
