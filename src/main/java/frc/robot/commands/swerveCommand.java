@@ -25,18 +25,21 @@ public class swerveCommand extends CommandBase {
   private final DoubleSupplier Ysupply;
   public final DoubleSupplier rotationSupply;
   
-  private final BooleanSupplier zero;
+  private final BooleanSupplier zero, return0, backwardYaw;
+  // JOJO REFERENCE OMG !1!!!111
   /**
    * Creates a new swerveCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public swerveCommand(SwerveSubsystem subsystem, DoubleSupplier Xmaker, DoubleSupplier Ymaker, DoubleSupplier rotateMaker, BooleanSupplier button) {
+  public swerveCommand(SwerveSubsystem subsystem, DoubleSupplier Xmaker, DoubleSupplier Ymaker, DoubleSupplier rotateMaker, BooleanSupplier button, BooleanSupplier Back0, BooleanSupplier Back180) {
     swerve = subsystem;
     Xsupply = Xmaker;
     Ysupply = Ymaker;
     zero = button;
     rotationSupply = rotateMaker;
+    return0 = Back0;
+    backwardYaw = Back180;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -51,11 +54,21 @@ public class swerveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double percent = swerve.Yaw()/18;
+    double percent180 = (180 - swerve.Yaw())/18;
+
+    if(return0.getAsBoolean()){
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(Xsupply.getAsDouble(), Ysupply.getAsDouble(),percent,swerve.getGyro()));
+    }else if(backwardYaw.getAsBoolean()){
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(Xsupply.getAsDouble(), Ysupply.getAsDouble(), percent180, swerve.getGyro()));
+    }
+    else{
     swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(
         Xsupply.getAsDouble(), 
         Ysupply.getAsDouble(), 
         rotationSupply.getAsDouble(), 
         swerve.getGyro()));
+    }
     swerve.zeroManual(zero.getAsBoolean());
     //Constants.Front_RightSTEER_Offset = -Math.toRadians(324);
     //Constants.Back_LeftSTEER_Offset = -Math.toRadians(40.5);

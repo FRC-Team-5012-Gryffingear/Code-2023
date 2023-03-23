@@ -22,7 +22,6 @@ public class Autos extends CommandBase {
   private final SwerveSubsystem swerve;
   private Timer times = new Timer();
   private double target = 0;
-  private PIDController controller = new PIDController(0.02, 0, 0.02);
 
 
   /**
@@ -47,14 +46,36 @@ public class Autos extends CommandBase {
   public void execute() {
     swerve.Yaw();
     double percent = swerve.Yaw()/10;
-    //swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0, swerve.getGyro()));
+    double percentPitch = swerve.Pitch()/32;
+    double power = (1.25/36) * 100;
+
+  if(times.get() > 0.5){
+    if(Math.abs(percentPitch * 100) < power){
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,percent, swerve.getGyro()));
+    }
+    else{
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(percentPitch, 0,percent, swerve.getGyro()));
+    }
+    if(times.get() > 7){
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,0, swerve.getGyro()));
+    } 
+
+  }
+ /*    
   if(times.get() > 0.5){
    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-0.5, 0, percent, swerve.getGyro()));
-   if(times.get() > 4){
+   if(times.get() > 2){
+    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0, -0.5, 0, swerve.getGyro()));
+   }
+   if(times.get() >4){
+    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(percentPitch,0,0, swerve.getGyro()));
+   }
+   if(times.get() > 6.5){
     swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0, swerve.getGyro()));
    }
   }
- 
+ */
+//this above is official
     //   swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1,0,0, swerve.getGyro()));
     // while(times.get() > 0.5){
     //   if(!swerve.YawDetectL()){

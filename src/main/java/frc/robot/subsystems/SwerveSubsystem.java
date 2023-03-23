@@ -116,9 +116,8 @@ import frc.robot.Constants;
 
  //Turning and Pitch
  public double Pitch(){
-  double tester = pigeon.getPitch();
-  double angleP = tester % 360;
-  return angleP;
+  double Pitch = pigeon.getRoll();
+  return Pitch;
  }
 
  public double Yaw(){
@@ -127,7 +126,6 @@ import frc.robot.Constants;
   Rotation2d.fromDegrees(test % 360);
   return angle;
 }
-
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -154,6 +152,8 @@ import frc.robot.Constants;
     //BL = 262.5
     SmartDashboard.putNumber("RAWYAW", Yaw());
     SmartDashboard.putNumber("RAWPITCH", Pitch());
+    SmartDashboard.putNumber("2RAWRAWPITCH", pigeon.getPitch());
+    SmartDashboard.putNumber("ROLL", pigeon.getRoll());
     SmartDashboard.putNumber("RAWRAWYAW", pigeon.getYaw());
   }
   @Override

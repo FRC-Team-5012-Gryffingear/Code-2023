@@ -7,9 +7,11 @@ package frc.robot;
 import frc.robot.Constants;
 import frc.robot.commands.AutoComs;
 import frc.robot.commands.Autos;
+import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.swerveCommand;
 import frc.robot.otherInfo.controllerConstant;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
@@ -47,6 +49,7 @@ public class RobotContainer {
 
     // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem swerve = new SwerveSubsystem();
+  private final ElevatorSubsystem elevsubsys = new ElevatorSubsystem();
  
   private final Autos autos = new Autos(swerve);
   private final AutoComs comman = new AutoComs(swerve);
@@ -67,7 +70,13 @@ public class RobotContainer {
     () -> modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_Y)) * swerve.Max_Velocity,
     () -> modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_X)) * swerve.Max_Velocity,
     () -> modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_X)) * swerve.Max_Angle,
-    () -> driver.getRawButton(controllerConstant.A)));
+    () -> driver.getRawButton(controllerConstant.A),
+    () -> driver.getRawButton(controllerConstant.B),
+    () -> driver.getRawButton(controllerConstant.X)));
+
+    elevsubsys.setDefaultCommand(new ElevatorCommand(elevsubsys,
+    ()-> operator.getRawAxis(controllerConstant.RIGHT_TRIGGER), 
+    () -> operator.getRawAxis(controllerConstant.LEFT_TRIGGER)));
     
   
   }
