@@ -9,10 +9,12 @@ import frc.robot.commands.AutoComs;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeCom;
 import frc.robot.commands.swerveCommand;
 import frc.robot.otherInfo.controllerConstant;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 
 import java.util.List;
@@ -49,6 +51,7 @@ public class RobotContainer {
 
     // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem swerve = new SwerveSubsystem();
+  private final IntakeSubsystem intakesubsys = new IntakeSubsystem();
   private final ElevatorSubsystem elevsubsys = new ElevatorSubsystem();
  
   private final Autos autos = new Autos(swerve);
@@ -78,6 +81,9 @@ public class RobotContainer {
     ()-> operator.getRawAxis(controllerConstant.RIGHT_TRIGGER), 
     () -> operator.getRawAxis(controllerConstant.LEFT_TRIGGER)));
     
+    intakesubsys.setDefaultCommand(new IntakeCom(intakesubsys,
+    () -> operator.getRawButton(controllerConstant.A), 
+    () -> operator.getRawButton(controllerConstant.B)));
   
   }
 

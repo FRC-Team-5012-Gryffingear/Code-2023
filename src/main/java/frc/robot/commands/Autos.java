@@ -44,14 +44,18 @@ public class Autos extends CommandBase {
   @Override
   //is it alligned
   public void execute() {
+    double percentforward = swerve.Yaw()/18;
+    double percent180 = (180 - Math.abs(swerve.Yaw()))/18;
+
     swerve.Yaw();
     double percent = swerve.Yaw()/10;
     double percentPitch = swerve.Pitch()/32;
     double power = (1.25/36) * 100;
-
+//Start
   if(times.get() > 0.5){
-   swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(1,0,0, swerve.getGyro()));
-   
+    //add extend arms here if needed
+    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1,0,percent, swerve.getGyro()));
+//if one second passed balance (Below code)
    if(times.get() > 3){
     if(Math.abs(percentPitch * 100) < power){
       swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,percent, swerve.getGyro()));

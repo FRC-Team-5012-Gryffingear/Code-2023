@@ -27,11 +27,7 @@ public class Constants {
     public static final int Elevator1 = 101;
     public static final int Elevator2 = 102;
 
-    public static final int NeoIntake1 = 15;
-    public static final int NeoIntake2 = 16;
-
-    public static final int Extender1 = 17;
-    public static final int Extender2 = 18;
+    public static final int VictorIntake = 1000;
 
     public static final int Front_LeftDRIVEMotor = 1;
     public static final int Front_LeftSTEERMotor = 2;
@@ -41,7 +37,7 @@ public class Constants {
     public static final int Front_RightDRIVEMotor =4;
     public static final int Front_RightSTEERMotor = 5;
     public static  int Front_RightSTEER_Encoder = 6;
-    public static double Front_RightSTEER_Offset = -Math.toRadians(320 - 45);
+    public static double Front_RightSTEER_Offset = -Math.toRadians(225);
 //24.5
     public static final int Back_LeftDRIVEMotor = 7;
     public static final int Back_LeftSTEERMotor = 8;
