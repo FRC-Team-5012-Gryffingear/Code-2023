@@ -15,15 +15,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class IntakeCom extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakeSubsystem m_subsystem;
-  private final BooleanSupplier Up, down;
+  private final BooleanSupplier Up, down, outward, inward;
   /**
    * Creates a new IntakeCom.
    * @param subsystem The subsystem used by this command.
    */
-  public IntakeCom(IntakeSubsystem subsystem,BooleanSupplier Upward, BooleanSupplier Downard) {
+  public IntakeCom(IntakeSubsystem subsystem,BooleanSupplier Upward, BooleanSupplier Downard, BooleanSupplier outside, BooleanSupplier inside) {
     m_subsystem = subsystem;
     Up = Upward;
     down = Downard;
+    outward = outside;
+    inward = inside;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -34,6 +36,7 @@ public class IntakeCom extends CommandBase {
   @Override
   public void execute() {
     m_subsystem.InMovement(Up.getAsBoolean(), down.getAsBoolean());
+    m_subsystem.Pivoting(outward.getAsBoolean(), inward.getAsBoolean());
   }
   // Called once the command ends or is interrupted.
   @Override

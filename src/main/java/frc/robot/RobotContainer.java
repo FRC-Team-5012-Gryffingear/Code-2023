@@ -54,7 +54,7 @@ public class RobotContainer {
   private final IntakeSubsystem intakesubsys = new IntakeSubsystem();
   private final ElevatorSubsystem elevsubsys = new ElevatorSubsystem();
  
-  private final Autos autos = new Autos(swerve);
+  private final Autos autos = new Autos(swerve, intakesubsys, elevsubsys);
   private final AutoComs comman = new AutoComs(swerve);
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -83,7 +83,9 @@ public class RobotContainer {
     
     intakesubsys.setDefaultCommand(new IntakeCom(intakesubsys,
     () -> operator.getRawButton(controllerConstant.A), 
-    () -> operator.getRawButton(controllerConstant.B)));
+    () -> operator.getRawButton(controllerConstant.B),
+    () -> operator.getRawButton(controllerConstant.RB),
+    () -> operator.getRawButton(controllerConstant.LB)));
   
   }
 

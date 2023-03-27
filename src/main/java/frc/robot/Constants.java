@@ -27,7 +27,9 @@ public class Constants {
     public static final int Elevator1 = 101;
     public static final int Elevator2 = 102;
 
-    public static final int VictorIntake = 1000;
+    public static final int pivotIntake = 103;
+
+    public static final int VictorIntake = 15;
 
     public static final int Front_LeftDRIVEMotor = 1;
     public static final int Front_LeftSTEERMotor = 2;

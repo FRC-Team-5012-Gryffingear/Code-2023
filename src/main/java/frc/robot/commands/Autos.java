@@ -4,7 +4,9 @@
 
 package frc.robot.commands;
 
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SwerveSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -20,6 +22,8 @@ public class Autos extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   //private final ExampleSubsystem m_subsystem;
   private final SwerveSubsystem swerve;
+  private final IntakeSubsystem intakesusbys;
+  private final ElevatorSubsystem elevsubsys;
   private Timer times = new Timer();
   private double target = 0;
 
@@ -28,8 +32,10 @@ public class Autos extends CommandBase {
    * Creates a new Autos.
    * @param subsystem The subsystem used by this command.
    */
-  public Autos(SwerveSubsystem subsystem) {
+  public Autos(SwerveSubsystem subsystem, IntakeSubsystem intake, ElevatorSubsystem elevator) {
     swerve = subsystem;
+    intakesusbys = intake;
+    elevsubsys = elevator;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -51,12 +57,25 @@ public class Autos extends CommandBase {
     double percent = swerve.Yaw()/10;
     double percentPitch = swerve.Pitch()/32;
     double power = (1.25/36) * 100;
+
 //Start
   if(times.get() > 0.5){
     //add extend arms here if needed
-    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1,0,percent, swerve.getGyro()));
+    elevsubsys.elevmovement(1);
+    if(times.get() > 1.5){
+      elevsubsys.elevmovement(0);
+      intakesusbys.InMovement(false, true);
+    }
+    if(times.get() > 2.25){
+      intakesusbys.InMovement(false, false);
+      elevsubsys.elevmovement(-1);
+    }
+    if(times.get() > 3){
+      elevsubsys.elevmovement(0);
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1, 0, percent, swerve.getGyro()));
+    }
 //if one second passed balance (Below code)
-   if(times.get() > 3){
+   if(times.get() > 5){
     if(Math.abs(percentPitch * 100) < power){
       swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,percent, swerve.getGyro()));
     }
@@ -72,7 +91,15 @@ public class Autos extends CommandBase {
 IMPORTANT AUTO BAL MOMENTO START
 
 
- 
+ if(Math.abs(percentPitch * 100) < power){
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,percent, swerve.getGyro()));
+    }
+    else{
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(percentPitch, 0,percent, swerve.getGyro()));
+    }
+    if(times.get() > 7){
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,0, swerve.getGyro()));
+    } 
 
 ENNDDEDEDEDEEEEEEEEEDEDDEDEDE
 
