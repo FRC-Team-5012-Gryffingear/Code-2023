@@ -8,6 +8,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,23 +18,23 @@ import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
-  VictorSPX victored = new VictorSPX(Constants.VictorIntake);
+  CANSparkMax intake = new CANSparkMax(Constants.SparkIntake, MotorType.kBrushless);
   VictorSPX pivot = new VictorSPX(Constants.pivotIntake);
   public IntakeSubsystem() {
-    victored.configFactoryDefault();
     pivot.configFactoryDefault();
+    intake.restoreFactoryDefaults();
 
     pivot.setNeutralMode(NeutralMode.Brake);
-    victored.setNeutralMode(NeutralMode.Brake);
+    intake.setIdleMode(IdleMode.kBrake);
     //add if inverted later
   }
   public void InMovement(boolean power, boolean back){
-    victored.set(ControlMode.PercentOutput, 0);
+    intake.set(0);
     if(power){
-        victored.set(ControlMode.PercentOutput, 0.25);
+        intake.set(0.25);
     }
     if(back){
-        victored.set(ControlMode.PercentOutput, -0.25);
+        intake.set(-0.25);
     }
   }
 //RB outward
