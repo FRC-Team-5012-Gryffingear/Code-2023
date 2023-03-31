@@ -7,6 +7,7 @@ package frc.robot.commands;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.networktables.DoubleSubscriber;
@@ -18,6 +19,7 @@ public class ElevatorCommand extends CommandBase {
   //private final ExampleSubsystem m_subsystem;
   private final ElevatorSubsystem elevsubsys;
   private final DoubleSupplier powersU, powersD;
+  //private final BooleanSupplier Outake, intake;
   /**
    * Creates a new ElevatorCommand.
    * @param subsystem The subsystem used by this command.
@@ -26,7 +28,9 @@ public class ElevatorCommand extends CommandBase {
     elevsubsys = subsystem;
     powersU = upsies;
     powersD = downsies;
-    // Use addRequirements() here to declare subsystem dependencies.
+    // Outake = outwardo;
+    // intake = inwardo;
+    // // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
   // Called when the command is initially scheduled.
@@ -36,6 +40,7 @@ public class ElevatorCommand extends CommandBase {
   @Override
   public void execute() {
     elevsubsys.elevmovement(powersU.getAsDouble() - powersD.getAsDouble());
+    //elevsubsys.elevPivot(Outake.getAsBoolean(), intake.getAsBoolean());
   }
   // Called once the command ends or is interrupted.
   @Override

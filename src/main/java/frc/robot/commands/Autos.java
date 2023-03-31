@@ -61,31 +61,18 @@ public class Autos extends CommandBase {
 //Start
   if(times.get() > 0.5){
     //add extend arms here if needed
-    elevsubsys.elevmovement(1);
-    if(times.get() > 1.5){
-      elevsubsys.elevmovement(0);
-      intakesusbys.InMovement(false, true);
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1, 0, percent, null));
+    if(times.get() > 3.5){
+      if(Math.abs(percentPitch * 100) < power){
+        swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,percent, swerve.getGyro()));
+      }
+      else{
+        swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(percentPitch, 0,percent, swerve.getGyro()));
+      }
+      if(times.get() > 7){
+        swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,0, swerve.getGyro()));
+      } 
     }
-    if(times.get() > 2.25){
-      intakesusbys.InMovement(false, false);
-      elevsubsys.elevmovement(-1);
-    }
-    if(times.get() > 3){
-      elevsubsys.elevmovement(0);
-      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1, 0, percent, swerve.getGyro()));
-    }
-//if one second passed balance (Below code)
-   if(times.get() > 5){
-    if(Math.abs(percentPitch * 100) < power){
-      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,percent, swerve.getGyro()));
-    }
-    else{
-      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(percentPitch, 0,percent, swerve.getGyro()));
-    }
-    if(times.get() > 7){
-      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,0, swerve.getGyro()));
-    } 
-   }
   }
  /*    
 IMPORTANT AUTO BAL MOMENTO START

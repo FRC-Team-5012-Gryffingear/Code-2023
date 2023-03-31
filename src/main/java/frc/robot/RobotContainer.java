@@ -76,10 +76,12 @@ public class RobotContainer {
     () -> driver.getRawButton(controllerConstant.A),
     () -> driver.getRawButton(controllerConstant.LB),
     () -> driver.getRawButton(controllerConstant.RB)));
-
+//OPERATOR CONTROLS:
+//IGNORE X AND Y FOR NOW
+//
     elevsubsys.setDefaultCommand(new ElevatorCommand(elevsubsys,
-    ()-> operator.getRawAxis(controllerConstant.RIGHT_TRIGGER), 
-    () -> operator.getRawAxis(controllerConstant.LEFT_TRIGGER)));
+    ()-> operator.getRawAxis(controllerConstant.LEFT_TRIGGER), 
+    () -> operator.getRawAxis(controllerConstant.RIGHT_TRIGGER)));
     
     intakesubsys.setDefaultCommand(new IntakeCom(intakesubsys,
     () -> operator.getRawButton(controllerConstant.A), 
@@ -90,6 +92,7 @@ public class RobotContainer {
   }
 
   /**
+   * 
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
    * predicate, or via the named factories in {@link

@@ -12,29 +12,31 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.motorcontrol.Victor;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
-  CANSparkMax intake = new CANSparkMax(Constants.SparkIntake, MotorType.kBrushless);
+  VictorSPX intake = new VictorSPX(Constants.SparkIntake);
   VictorSPX pivot = new VictorSPX(Constants.pivotIntake);
   public IntakeSubsystem() {
     pivot.configFactoryDefault();
-    intake.restoreFactoryDefaults();
+    intake.configFactoryDefault();
 
     pivot.setNeutralMode(NeutralMode.Brake);
-    intake.setIdleMode(IdleMode.kBrake);
+    intake.setNeutralMode(NeutralMode.Brake);
     //add if inverted later
   }
   public void InMovement(boolean power, boolean back){
-    intake.set(0);
+    intake.set(ControlMode.PercentOutput, 0);
     if(power){
-        intake.set(0.25);
+        intake.set(ControlMode.PercentOutput, 0.5);
     }
     if(back){
-        intake.set(-0.25);
+        intake.set(ControlMode.PercentOutput, -.5);
     }
   }
 //RB outward

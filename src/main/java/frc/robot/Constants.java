@@ -32,7 +32,7 @@ public class Constants {
     public static final int Front_RightDRIVEMotor =4;
     public static final int Front_RightSTEERMotor = 5;
     public static  int Front_RightSTEER_Encoder = 6;
-    public static double Front_RightSTEER_Offset = -Math.toRadians(225);
+    public static double Front_RightSTEER_Offset = -Math.toRadians(200);
 //24.5
     public static final int Back_LeftDRIVEMotor = 7;
     public static final int Back_LeftSTEERMotor = 8;
@@ -49,4 +49,5 @@ public class Constants {
 
     public static final int SparkIntake = 15;
     public static final int pivotIntake = 16;
+
 }     

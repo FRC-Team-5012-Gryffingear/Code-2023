@@ -6,8 +6,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FollowerType;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -25,11 +28,25 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevMotor1.setNeutralMode(NeutralMode.Brake);
     elevMotor2.setNeutralMode(NeutralMode.Brake);
 
-    elevMotor2.follow(elevMotor1);
+    
+    
+    
   }
   public void elevmovement(double power) {
-    elevMotor1.set(ControlMode.PercentOutput, power);
+    elevMotor1.set(ControlMode.PercentOutput, power/2);
+    elevMotor2.set(ControlMode.PercentOutput, power/2);
   }
+
+  
+  // public void elevPivot(boolean outward, boolean inward){
+  //   elevPivot.set(ControlMode.PercentOutput, 0);
+  //   if(outward){
+  //     elevPivot.set(ControlMode.PercentOutput, -0.25);
+  //   }
+  //   if(inward){
+  //     elevPivot.set(ControlMode.PercentOutput, 0.25);
+  //   }
+  // }
 
   @Override
   public void periodic() {
