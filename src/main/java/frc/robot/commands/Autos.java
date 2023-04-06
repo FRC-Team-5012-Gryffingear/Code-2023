@@ -60,19 +60,8 @@ public class Autos extends CommandBase {
 
 //Start
   if(times.get() > 0.5){
-    //add extend arms here if needed
-      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1, 0, percent, null));
-    if(times.get() > 3.5){
-      if(Math.abs(percentPitch * 100) < power){
-        swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,percent, swerve.getGyro()));
-      }
-      else{
-        swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(percentPitch, 0,percent, swerve.getGyro()));
-      }
-      if(times.get() > 7){
-        swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,0, swerve.getGyro()));
-      } 
-    }
+      swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, percent, swerve.getGyro()));
+    
   }
  /*    
 IMPORTANT AUTO BAL MOMENTO START

@@ -43,10 +43,10 @@ public class IntakeSubsystem extends SubsystemBase {
   public void Pivoting(boolean outward, boolean inward){
     pivot.set(ControlMode.PercentOutput, 0);
     if(outward){
-        pivot.set(ControlMode.PercentOutput, 0.25);
+        pivot.set(ControlMode.PercentOutput, 1);
     }
     if(inward){
-        pivot.set(ControlMode.PercentOutput, -0.25);
+        pivot.set(ControlMode.PercentOutput, -1);
     }
   }
 

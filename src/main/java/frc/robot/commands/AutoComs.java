@@ -35,10 +35,21 @@ public class AutoComs extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double percentforward = swerve.Yaw()/18;
+    double percent180 = (180 - Math.abs(swerve.Yaw()))/18;
+
+    swerve.Yaw();
+    double percent = swerve.Yaw()/10;
+    double percentPitch = swerve.Pitch()/32;
+    double power = (1.25/36) * 100;
+
   if(quick.get() > 0.5){
-    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1, 0, 0, swerve.getGyro()));
-        if(quick.get() > 5){
-          swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0, swerve.getGyro()));
+    swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(2, 0, percent, swerve.getGyro()));
+        if(quick.get() > 2){
+          swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(-1, 0, percent, swerve.getGyro()));
+        }
+      if (quick.get() > 6.75){
+         swerve.drive(ChassisSpeeds.fromFieldRelativeSpeeds(0,0,percent,swerve.getGyro()));
         }
     //First 
       // if (quick.get() > 1.5){
