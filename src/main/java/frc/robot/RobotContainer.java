@@ -4,8 +4,10 @@
 
 package frc.robot;
 
+import frc.robot.commands.AdaluzCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.otherInfo.controllerConstant;
+import frc.robot.subsystems.AdaluzSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -22,6 +24,10 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
+  private final AdaluzSubsystem Adaluz = new AdaluzSubsystem();
+
+  private final Joystick motion = new Joystick(0);
+
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   
@@ -32,7 +38,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
 
-
+    Adaluz.setDefaultCommand(new AdaluzCommand(Adaluz, 
+    () -> motion.getRawAxis(controllerConstant.RIGHT_TRIGGER), 
+    () -> motion.getRawAxis(controllerConstant.LEFT_TRIGGER), 
+    () -> motion.getRawAxis(controllerConstant.LEFT_STICK_X)));
 
 
 
