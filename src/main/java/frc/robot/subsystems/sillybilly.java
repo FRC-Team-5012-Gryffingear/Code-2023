@@ -33,7 +33,6 @@ public class sillybilly extends SubsystemBase {
 
   public void L(double e, double t){
     monkey.set(e - t);
-
   }
 
 
