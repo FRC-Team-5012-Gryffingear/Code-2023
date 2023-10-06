@@ -10,6 +10,9 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,7 +21,6 @@ public class sillybilly extends SubsystemBase {
   /** Creates a new sillybilly. */
   //NEO motorcontroller
   CANSparkMax monkey = new CANSparkMax(0, MotorType.kBrushless);
-
   public sillybilly() {
     monkey.restoreFactoryDefaults();
 
