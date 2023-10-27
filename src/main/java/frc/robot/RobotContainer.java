@@ -9,6 +9,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.otherInfo.controllerConstant;
 import frc.robot.subsystems.AdaluzSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.ripadaluz;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -28,6 +29,8 @@ public class RobotContainer {
   private final AdaluzSubsystem Adaluz = new AdaluzSubsystem();
 
   private final Joystick motion = new Joystick(0);
+
+  private final ripadaluz Ripadaluz2 = new ripadaluz();
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -62,10 +65,11 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
   //   new Trigger(m_exampleSubsystem::exampleCondition)
   //       .onTrue(new ExampleCommand(m_exampleSubsystem));
-
   //   // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
   //   // cancelling on release.
   //   m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+  
+
 }
 
 
