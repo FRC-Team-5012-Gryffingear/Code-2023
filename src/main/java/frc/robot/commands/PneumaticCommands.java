@@ -18,7 +18,7 @@ public class PneumaticCommands extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public PneumaticCommands(ripadaluz subsystem   ) {
+  public PneumaticCommands(ripadaluz subsystem) {
 
 
 

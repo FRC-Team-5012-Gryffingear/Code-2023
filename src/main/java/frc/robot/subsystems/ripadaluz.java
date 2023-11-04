@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ripadaluz extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-    DoubleSolenoid andrew = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 0);
+    DoubleSolenoid andrew = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
 
 
   public ripadaluz() {

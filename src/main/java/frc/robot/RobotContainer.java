@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.commands.AdaluzCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PneumaticCommands;
 import frc.robot.otherInfo.controllerConstant;
 import frc.robot.subsystems.AdaluzSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -42,12 +43,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
 
-    Adaluz.setDefaultCommand(new AdaluzCommand(Adaluz, 
-    () -> motion.getRawAxis(controllerConstant.RIGHT_TRIGGER), 
-    () -> motion.getRawAxis(controllerConstant.LEFT_TRIGGER), 
-    () -> motion.getRawAxis(controllerConstant.LEFT_STICK_X)));
-
-
 
     configureBindings();
   }
@@ -63,12 +58,12 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-  //   new Trigger(m_exampleSubsystem::exampleCondition)
-  //       .onTrue(new ExampleCommand(m_exampleSubsystem));
+    // new Trigger(m_exampleSubsystem::exampleCondition)
+    //      .onTrue(new ExampleCommand(m_exampleSubsystem));
   //   // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
   //   // cancelling on release.
   //   m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-  
+  new JoystickButton(motion, controllerConstant.A).toggleOnTrue(new PneumaticCommands(Ripadaluz2));
 
 }
 
