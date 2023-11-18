@@ -23,6 +23,8 @@ public class ripadaluz extends SubsystemBase {
 
 
   }
+
+  
  public void outlet(boolean t){
     if(t){
         andrew.set(Value.kForward);
