@@ -24,6 +24,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.constraint.SwerveDriveKinematicsConstraint;
 import edu.wpi.first.wpilibj.AnalogEncoder;
@@ -52,6 +53,7 @@ import frc.robot.Constants;
   CANCoder FR = new CANCoder(Constants.Front_RightSTEER_Encoder);
   CANCoder BL = new CANCoder(Constants.Back_LeftSTEER_Encoder);
   CANCoder BR = new CANCoder(Constants.Back_RightSTEER_Encoder);
+  
 
   public static final double Voltage = 12.0; 
 
@@ -79,9 +81,9 @@ import frc.robot.Constants;
   private final SwerveModule frontRightModule;
   private final SwerveModule backLeftModule;
   private final SwerveModule backRightModule;
-
  // int FrontLdrive = Front_leftDRIVEMotor;
-  
+
+
 
   private ChassisSpeeds baseSpeed = new ChassisSpeeds(0,0,0);
  
@@ -91,11 +93,11 @@ import frc.robot.Constants;
     frontRightModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1, Constants.Front_RightDRIVEMotor,Constants.Front_RightSTEERMotor,Constants.Front_RightSTEER_Encoder,Constants.Front_RightSTEER_Offset);
     backLeftModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1, Constants.Back_LeftDRIVEMotor, Constants.Back_LeftSTEERMotor, Constants.Back_LeftSTEER_Encoder, Constants.Back_LeftSTEER_Offset);
     backRightModule = Mk4SwerveModuleHelper.createFalcon500(Mk4SwerveModuleHelper.GearRatio.L1, Constants.Back_RightDRIVEMotor, Constants.Back_RightSTEERMotor, Constants.Back_RightSTEER_Encoder, Constants.Back_RIGHTSTEER_Offset);
-}
+  }
 
   public void drive(ChassisSpeeds chassisSpeeds){
     baseSpeed = chassisSpeeds;
-     
+   
   }
 
 
@@ -109,6 +111,7 @@ import frc.robot.Constants;
       pigeon.setYaw(0.0);
     }
   }
+  
 
   public Rotation2d getGyro(){
     return Rotation2d.fromDegrees(pigeon.getYaw());
@@ -126,6 +129,8 @@ import frc.robot.Constants;
   Rotation2d.fromDegrees(test % 360);
   return angle;
 }
+
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -136,6 +141,8 @@ import frc.robot.Constants;
     frontRightModule.set(states[1].speedMetersPerSecond / Max_Velocity * Voltage, states[1].angle.getRadians());
     backLeftModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
     backRightModule.set(states[3].speedMetersPerSecond / Max_Velocity * Voltage, states[3].angle.getRadians());
+
+    
    
     SmartDashboard.putNumber("Front right", FR.getAbsolutePosition());
     SmartDashboard.putNumber("Front Left", FL.getAbsolutePosition());
