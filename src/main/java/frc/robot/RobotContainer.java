@@ -5,10 +5,16 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ArcadeDriveComTest;
+import frc.robot.commands.ArcadeDriveComTest;
 import frc.robot.otherInfo.controllerConstant;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.ArcadeDriveSSTest;
+import frc.robot.subsystems.ArcadeDriveSSTest;
+
+import com.swervedrivespecialties.swervelib.DriveController;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -21,7 +27,14 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final ArcadeDriveSSTest m_ArcadeDriveSSTest = new ArcadeDriveSSTest();
+
+  //public final DriveController drivercontroller;
+  //public final OperatorConstants operatorconstants;
+
+  private final Joystick joystick = new Joystick(OperatorConstants.kDriverControllerPort);
+  
+  
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -34,7 +47,10 @@ public class RobotContainer {
     // Configure the trigger bindings
 
 
+
+
     configureBindings();
+    
   }
 
   /**
@@ -47,13 +63,16 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-  //   new Trigger(m_exampleSubsystem::exampleCondition)
-  //       .onTrue(new ExampleCommand(m_exampleSubsystem));
+    m_ArcadeDriveSSTest.setDefaultCommand(new ArcadeDriveComTest(m_ArcadeDriveSSTest, 
+      () -> joystick.getRawAxis(controllerConstant.RIGHT_TRIGGER), 
+      () -> joystick.getRawAxis(controllerConstant.LEFT_TRIGGER),
+      () -> joystick.getRawAxis(controllerConstant.LEFT_STICK_X),
+      () -> joystick.getRawButton(controllerConstant.A)
+      ));
 
-  //   // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-  //   // cancelling on release.
-  //   m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    
+
+  
 
 
 
