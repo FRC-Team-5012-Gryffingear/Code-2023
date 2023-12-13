@@ -10,6 +10,7 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCom;
+import frc.robot.commands.ModulePos;
 import frc.robot.commands.swerveCommand;
 import frc.robot.otherInfo.controllerConstant;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -62,6 +63,7 @@ public class RobotContainer {
   private final Joystick operator = new Joystick(Constants.operatorController);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    swerve.setDefaultCommand(new ModulePos(swerve));
 
     // swerve.setDefaultCommand(new swerveCommand(swerve,
     // () -> -modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_X)) * swerve.Max_Velocity,
@@ -70,9 +72,9 @@ public class RobotContainer {
     // () -> driver.getRawButton(controllerConstant.B)));
     // // Configure the trigger bindings
     swerve.setDefaultCommand(new swerveCommand(swerve, 
-    () -> modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_Y)) * swerve.Max_Velocity,
-    () -> modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_X)) * swerve.Max_Velocity,
-    () -> modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_X)) * swerve.Max_Angle,
+    () -> modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_Y)) * swerve.Max_Velocity,
+    () -> modifyAxis(driver.getRawAxis(controllerConstant.LEFT_STICK_X)) * swerve.Max_Velocity,
+    () -> modifyAxis(driver.getRawAxis(controllerConstant.RIGHT_STICK_X)) * swerve.Max_Angle,
     () -> driver.getRawButton(controllerConstant.A),
     () -> driver.getRawButton(controllerConstant.LB),
     () -> driver.getRawButton(controllerConstant.RB)));

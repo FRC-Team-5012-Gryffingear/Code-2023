@@ -55,7 +55,7 @@ import frc.robot.Constants;
   CANCoder BR = new CANCoder(Constants.Back_RightSTEER_Encoder);
   
 
-  public static final double Voltage = 12.0; 
+  public static final double Voltage = 8.0; 
 
   //change back to static if needed
   public final double Max_Velocity =  6380.0 / 60 * SdsModuleConfigurations.MK4_L1.getDriveReduction() * SdsModuleConfigurations.MK4_L1.getWheelDiameter() * Math.PI;
@@ -130,6 +130,25 @@ import frc.robot.Constants;
   return angle;
 }
 
+public SwerveModulePosition[] pos(){
+  // in meters
+    double distance1= frontLeftModule.getDriveVelocity() * 0.02;
+    double distance2 = frontRightModule.getDriveVelocity() * 0.02;
+    double distance3 = backLeftModule.getDriveVelocity() * 0.02;
+    double distance4 = backRightModule.getDriveVelocity() * 0.02;
+    
+    SwerveModulePosition mod1 = new SwerveModulePosition(distance1, Rotation2d.fromDegrees(frontLeftModule.getSteerAngle()));
+    SwerveModulePosition mod2 = new SwerveModulePosition(distance2, Rotation2d.fromDegrees(frontRightModule.getSteerAngle()));
+    SwerveModulePosition mod3 = new SwerveModulePosition(distance3, Rotation2d.fromDegrees(backLeftModule.getSteerAngle()));
+    SwerveModulePosition mod4 = new SwerveModulePosition(distance4, Rotation2d.fromDegrees(backRightModule.getSteerAngle()));
+    
+
+
+    SwerveModulePosition[] CombinedPos = {mod1, mod2, mod3, mod4};
+
+    return CombinedPos;
+}
+
 
   @Override
   public void periodic() {
@@ -141,6 +160,16 @@ import frc.robot.Constants;
     frontRightModule.set(states[1].speedMetersPerSecond / Max_Velocity * Voltage, states[1].angle.getRadians());
     backLeftModule.set(states[2].speedMetersPerSecond / Max_Velocity * Voltage, states[2].angle.getRadians());
     backRightModule.set(states[3].speedMetersPerSecond / Max_Velocity * Voltage, states[3].angle.getRadians());
+
+    double distance1 = (frontLeftModule.getDriveVelocity() * 0.02) * 39.47;
+    double distance2 = (frontRightModule.getDriveVelocity() * 0.02) * 39.47;
+    double distance3 = (backLeftModule.getDriveVelocity() * 0.02) * 39.47;
+    double distance4 = (backRightModule.getDriveVelocity() * 0.02) * 39.47;
+
+    SmartDashboard.putNumber("LeftF dis inches", distance1);
+    SmartDashboard.putNumber("RightF dis", distance2);
+    SmartDashboard.putNumber("LeftB dis", distance3);
+    SmartDashboard.putNumber("RightB dis", distance4);
 
     
    
